@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold-50: #fbf8eb;
+  --color-gold-100: #f5eed1;
+  --color-gold-200: #ecda9b;
+  --color-gold-300: #e2c25c;
+  --color-gold-400: #dca72f;
+  --color-gold-500: #d18d18;
+  --color-gold-600: #b56b10;
+  --color-gold-700: #904c10;
+  --color-gold-800: #763d13;
+  --color-gold-900: #653315;
+  --color-gold-950: #3a1908;
+  
+  --color-dark-50: #f6f6f6;
+  --color-dark-100: #e7e7e7;
+  --color-dark-200: #d1d1d1;
+  --color-dark-300: #b0b0b0;
+  --color-dark-400: #888888;
+  --color-dark-500: #6d6d6d;
+  --color-dark-600: #5d5d5d;
+  --color-dark-700: #4f4f4f;
+  --color-dark-800: #454545;
+  --color-dark-900: #3d3d3d;
+  --color-dark-950: #1a1a1a;
+  
+  --color-black-pure: #050505;
+  --color-black-rich: #111111;
+  
+  --animate-fade-in: fadeIn 0.8s ease-out forwards;
+  --animate-fade-up: fadeUp 0.8s ease-out forwards;
+  --animate-fade-down: fadeDown 0.8s ease-out forwards;
+}
+
+@layer base {
+  :root {
+    --background: #fdfdfd;
+    --foreground: #111111;
+    --card: #ffffff;
+    --card-foreground: #111111;
+    --border: #e7e7e7;
+  }
+  
+  .dark {
+    --background: #050505;
+    --foreground: #f6f6f6;
+    --card: #111111;
+    --card-foreground: #f6f6f6;
+    --border: #3d3d3d;
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    direction: rtl;
+  }
+  
+  /* Custom scrollbar for a luxury feel */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #050505; 
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3d3d3d; 
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d18d18; 
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .glassmorphism {
+    background: rgba(17, 17, 17, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .glassmorphism-gold {
+    background: rgba(209, 141, 24, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(209, 141, 24, 0.2);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
