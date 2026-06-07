@@ -25,19 +25,20 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-[100] transition-all duration-500",
         isScrolled 
-          ? "bg-black-pure/95 backdrop-blur-xl border-b border-white/5 py-3 shadow-2xl shadow-black" 
-          : "bg-gradient-to-b from-black-pure/90 to-transparent py-5"
+          ? "bg-black-pure/95 backdrop-blur-xl border-b border-white/5 py-2 md:py-3 shadow-2xl shadow-black" 
+          : "bg-gradient-to-b from-black-pure/90 to-transparent py-4 md:py-6"
       )}
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-300 via-gold-500 to-gold-700 flex items-center justify-center text-black-pure font-black text-2xl shadow-lg shadow-gold-500/20 group-hover:shadow-gold-500/40 transition-all transform group-hover:rotate-6">
-            ط
+        {/* Dynamic CSS Logo */}
+        <Link href="/" className="flex items-center gap-2 md:gap-3 group">
+          <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br from-gold-300 via-gold-500 to-gold-700 flex items-center justify-center text-black-pure font-black text-xl md:text-2xl shadow-lg shadow-gold-500/20 group-hover:shadow-gold-500/40 transition-all transform group-hover:rotate-6 overflow-hidden">
+            <span className="relative z-10">ط</span>
+            <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent"></div>
           </div>
           <div className="flex flex-col">
-            <span className="text-2xl font-black text-white tracking-tighter leading-none group-hover:text-gold-400 transition-colors uppercase">التقوى</span>
-            <span className="text-[10px] text-gold-500 font-black tracking-[0.2em] uppercase">Aluminum & Kitchens</span>
+            <span className="text-xl md:text-2xl font-black text-white tracking-tighter leading-none group-hover:text-gold-400 transition-colors uppercase">التقوى</span>
+            <span className="text-[8px] md:text-[10px] text-gold-500 font-black tracking-[0.15em] md:tracking-[0.2em] uppercase">Aluminum & Kitchens</span>
           </div>
         </Link>
 
@@ -83,16 +84,16 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Toggle & Phone Icon */}
-        <div className="flex items-center gap-4 lg:hidden">
-          <a href={`tel:${siteInfo.phone}`} className="p-3 rounded-xl bg-gold-500 text-black-pure shadow-lg shadow-gold-500/20">
-            <PhoneCall className="w-6 h-6" />
+        <div className="flex items-center gap-2 md:gap-4 lg:hidden">
+          <a href={`tel:${siteInfo.phone}`} className="p-2.5 md:p-3 rounded-lg md:rounded-xl bg-gold-500 text-black-pure shadow-lg shadow-gold-500/20 active:scale-95 transition-transform">
+            <PhoneCall className="w-5 h-5 md:w-6 md:h-6" />
           </a>
           <button 
-            className="p-3 rounded-xl bg-white/5 text-gray-300 border border-white/10"
+            className="p-2.5 md:p-3 rounded-lg md:rounded-xl bg-white/5 text-gray-300 border border-white/10 active:scale-95 transition-transform"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? <X className="w-5 h-5 md:w-6 md:h-6" /> : <Menu className="w-5 h-5 md:w-6 md:h-6" />}
           </button>
         </div>
       </div>
@@ -100,12 +101,12 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <div 
         className={cn(
-          "fixed inset-0 top-0 left-0 w-full h-screen bg-black-pure/98 backdrop-blur-3xl z-[90] lg:hidden transition-all duration-500 ease-in-out",
+          "fixed inset-0 top-0 left-0 w-full h-screen bg-black-pure/98 backdrop-blur-3xl z-[90] lg:hidden transition-all duration-500 ease-in-out overflow-hidden",
           isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"
         )}
       >
-        <div className="flex flex-col h-full overflow-y-auto pb-32 p-8 gap-10 pt-28">
-          <nav className="flex flex-col gap-2">
+        <div className="flex flex-col h-full overflow-y-auto pb-20 p-6 md:p-8 gap-8 md:gap-10 pt-24 md:pt-28">
+          <nav className="flex flex-col gap-1 md:gap-2">
             {navLinks.map((link) => {
               const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
               return (
@@ -114,7 +115,7 @@ export default function Navbar() {
                   href={link.href}
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    "text-2xl font-black p-4 rounded-2xl transition-all flex items-center justify-between group",
+                    "text-xl md:text-2xl font-black p-4 rounded-xl md:rounded-2xl transition-all flex items-center justify-between group",
                     isActive 
                       ? "text-gold-500 bg-gold-500/5 border border-gold-500/20 px-6" 
                       : "text-gray-400 hover:text-white"
@@ -127,17 +128,18 @@ export default function Navbar() {
             })}
           </nav>
           
-          <div className="mt-auto flex flex-col gap-6">
+          <div className="mt-auto flex flex-col gap-4 md:gap-6">
             <a 
               href={`tel:${siteInfo.phone}`}
-              className="flex items-center justify-center gap-4 p-6 rounded-[2rem] bg-gold-500 text-black-pure font-black text-2xl shadow-2xl shadow-gold-500/20 border border-gold-400"
+              className="flex items-center justify-center gap-3 md:gap-4 p-5 md:p-6 rounded-2xl md:rounded-[2rem] bg-gold-500 text-black-pure font-black text-xl md:text-2xl shadow-2xl shadow-gold-500/20 border border-gold-400"
             >
-              <PhoneCall className="w-8 h-8" />
+              <PhoneCall className="w-6 h-6 md:w-8 md:h-8" />
               <span className="tracking-tighter dir-ltr">{siteInfo.phone}</span>
             </a>
             <Link
               href="/quote"
-              className="flex items-center justify-center p-6 rounded-[2rem] bg-white/5 text-white font-black text-xl border border-white/10"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center justify-center p-5 md:p-6 rounded-2xl md:rounded-[2rem] bg-white/5 text-white font-black text-lg md:text-xl border border-white/10"
             >
               اطلب عرض سعر مجاني
             </Link>

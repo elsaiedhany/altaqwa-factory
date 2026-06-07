@@ -22,19 +22,39 @@ export default function Footer() {
           
           {/* Brand Info */}
           <div className="flex flex-col gap-6">
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-black-pure font-bold text-2xl shadow-lg shadow-gold-500/20">
-                ط
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-gold-300 via-gold-500 to-gold-700 flex items-center justify-center text-black-pure font-black text-2xl shadow-lg shadow-gold-500/20 group-hover:shadow-gold-500/40 transition-all overflow-hidden">
+                <span className="relative z-10">ط</span>
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent"></div>
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-bold text-white tracking-tight leading-none">التقوى</span>
-                <span className="text-sm text-gold-500 font-medium">للألوميتال والمطابخ</span>
+                <span className="text-2xl font-black text-white tracking-tighter leading-none group-hover:text-gold-400 transition-colors uppercase">التقوى</span>
+                <span className="text-[10px] text-gold-500 font-black tracking-[0.2em] uppercase leading-tight mt-1">Aluminum & Kitchens</span>
               </div>
             </Link>
             <p className="text-gray-400 leading-relaxed text-sm">
               مصنع التقوى للألوميتال والمطابخ - خبرة أكثر من 22 عاماً في تصنيع وتوريد المطابخ والألوميتال بأعلى معايير الجودة والالتزام التام بالمواعيد.
             </p>
-            <div className="flex items-center gap-4">
+            
+            {/* Local SEO Section */}
+            <div className="mt-2">
+              <a 
+                href={`https://www.google.com/search?q=${encodeURIComponent("شركة التقوى للأعمال الالومنيوم هاني الفقي")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-gold-500/50 hover:bg-gold-500/5 transition-all group"
+              >
+                <div className="w-8 h-8 rounded-full bg-gold-500 flex items-center justify-center text-black-pure shadow-lg shadow-gold-500/20">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs text-gray-500 font-bold uppercase tracking-widest leading-none mb-1">تجدنا على خرائط جوجل</span>
+                  <span className="text-sm text-white font-bold group-hover:text-gold-400 transition-colors">شركة التقوى - هاني الفقي</span>
+                </div>
+              </a>
+            </div>
+
+            <div className="flex items-center gap-4 mt-2">
               <a href={siteInfo.socials.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gold-500 hover:border-gold-500 transition-all duration-300">
                 <FacebookIcon className="w-5 h-5" />
               </a>
