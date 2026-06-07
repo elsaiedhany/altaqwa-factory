@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, PhoneCall } from "lucide-react";
+import Image from "next/image";
 import { navLinks, siteInfo } from "@/data/siteData";
 import { cn } from "@/lib/utils";
+import { MEDIA } from "@/data/mediaRegistry";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,11 +32,15 @@ export default function Navbar() {
       )}
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-        {/* Dynamic CSS Logo */}
+        {/* Professional Image Logo */}
         <Link href="/" className="flex items-center gap-2 md:gap-3 group">
-          <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br from-gold-300 via-gold-500 to-gold-700 flex items-center justify-center text-black-pure font-black text-xl md:text-2xl shadow-lg shadow-gold-500/20 group-hover:shadow-gold-500/40 transition-all transform group-hover:rotate-6 overflow-hidden">
-            <span className="relative z-10">ط</span>
-            <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent"></div>
+          <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl overflow-hidden border-2 border-gold-500/50 shadow-lg shadow-gold-500/20 group-hover:shadow-gold-500/40 transition-all transform group-hover:scale-105 active:scale-95">
+            <Image 
+              src={MEDIA.services.kitchens}
+              alt={siteInfo.name}
+              fill
+              className="object-cover"
+            />
           </div>
           <div className="flex flex-col">
             <span className="text-xl md:text-2xl font-black text-white tracking-tighter leading-none group-hover:text-gold-400 transition-colors uppercase">التقوى</span>

@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[100dvh] flex items-center justify-start md:justify-center pt-0 pb-12 md:pb-20 overflow-hidden">
+    <section className="relative min-h-[100dvh] flex items-center justify-start md:justify-center pt-0 pb-12 md:pb-20 overflow-hidden w-full max-w-[100vw] overflow-x-hidden">
       {/* Optimized Background Image for LCP */}
       <div className="absolute inset-0 z-0">
         <Image 

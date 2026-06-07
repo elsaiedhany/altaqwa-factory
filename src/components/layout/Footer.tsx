@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Phone, MapPin, Clock } from "lucide-react";
+import Image from "next/image";
 import { siteInfo, navLinks, servicesList } from "@/data/siteData";
+import { MEDIA } from "@/data/mediaRegistry";
 
 const FacebookIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
@@ -23,9 +25,13 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="flex flex-col gap-6">
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-gold-300 via-gold-500 to-gold-700 flex items-center justify-center text-black-pure font-black text-2xl shadow-lg shadow-gold-500/20 group-hover:shadow-gold-500/40 transition-all overflow-hidden">
-                <span className="relative z-10">ط</span>
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent"></div>
+              <div className="relative w-12 h-12 rounded-xl overflow-hidden border-2 border-gold-500/50 shadow-lg shadow-gold-500/20 group-hover:shadow-gold-500/40 transition-all">
+                <Image 
+                  src={MEDIA.services.kitchens}
+                  alt={siteInfo.name}
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="text-2xl font-black text-white tracking-tighter leading-none group-hover:text-gold-400 transition-colors uppercase">التقوى</span>
