@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FloatingContact from "@/components/ui/FloatingContact";
+import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import SchemaMarkup from "@/components/layout/SchemaMarkup";
 
 const cairo = Cairo({ 
@@ -86,6 +87,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <FloatingContact />
+        <FloatingWhatsApp />
       </body>
     </html>
   );
