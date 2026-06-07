@@ -12,7 +12,7 @@ export const siteInfo = {
   owner: "م/ هاني توفيق الفقي",
   phone: "01003515207",
   whatsapp: "201003515207",
-  email: "info@altaqwa-factory.vercel.app",
+  email: "saiedhany40@gmail.com",
   location: "المنصورة - السنبلاوين - كفر الروك - محافظة الدقهلية - مصر",
   seoKeywords: [
     "مطابخ بولي لاك المنصورة",
