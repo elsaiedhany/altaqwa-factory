@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Send, Phone, User, MapPin, Ruler, CheckCircle2 } from "lucide-react";
+import { Send, Phone, User, MapPin, Ruler, CheckCircle2, MessageCircle } from "lucide-react";
 import { siteInfo } from "@/data/siteData";
 
 export default function QuoteClient() {
