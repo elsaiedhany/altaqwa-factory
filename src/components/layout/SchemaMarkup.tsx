@@ -4,10 +4,10 @@ export default function SchemaMarkup() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://altaqwafactory.com#organization",
+    "@id": "https://altaqwa-factory.vercel.app#organization",
     "name": siteInfo.name,
-    "image": "https://altaqwafactory.com/assets/images/kitchen-luxury-cream-gold-1.jpg.jpg",
-    "url": "https://altaqwafactory.com",
+    "image": "https://altaqwa-factory.vercel.app/assets/images/kitchen-luxury-cream-gold-1.jpg.jpg",
+    "url": "https://altaqwa-factory.vercel.app",
     "telephone": siteInfo.phone,
     "address": {
       "@type": "PostalAddress",
@@ -41,23 +41,23 @@ export default function SchemaMarkup() {
     "priceRange": "$$$",
     "description": siteInfo.name + " - خبرة أكثر من 22 عاماً في تصنيع مطابخ البولي لاك والألوميتال، غرف الدريسنج، والشبابيك والأبواب بأعلى جودة وضمان 20 سنة.",
     "founder": {
-      "@id": "https://altaqwafactory.com#founder"
+      "@id": "https://altaqwa-factory.vercel.app#founder"
     }
   };
 
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": "https://altaqwafactory.com#founder",
+    "@id": "https://altaqwa-factory.vercel.app#founder",
     "name": "هاني توفيق الفقي",
     "alternateName": ["المهندس هاني توفيق الفقي", "Hany Tawfik El Faqy", "Eng. Hany Tawfik El Faqy"],
     "jobTitle": "المؤسس والمشرف الفني",
     "worksFor": {
-      "@id": "https://altaqwafactory.com#organization"
+      "@id": "https://altaqwa-factory.vercel.app#organization"
     },
-    "image": "https://altaqwafactory.com/assets/images/eng-hany-tawfik-el-faqy-ceo-taqwa.jpg.jpg",
+    "image": "https://altaqwa-factory.vercel.app/assets/images/eng-hany-tawfik-el-faqy-ceo-taqwa.jpg.jpg",
     "description": "المهندس هاني توفيق الفقي، خبرة أكثر من 22 عاماً في مجال تصنيع المطابخ والألوميتال في مصر، ومؤسس مصنع التقوى للألوميتال والمطابخ.",
-    "url": "https://altaqwafactory.com/about"
+    "url": "https://altaqwa-factory.vercel.app/about"
   };
 
   return (

@@ -1,8 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://altaqwafactory.com'
-  
+  const baseUrl = 'https://altaqwa-factory.vercel.app'
   const routes = [
     '',
     '/about',

@@ -20,7 +20,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://altaqwafactory.com'),
+  metadataBase: new URL('https://altaqwa-factory.vercel.app'),
   title: {
     default: "مصنع التقوى للألوميتال والمطابخ - خبرة أكثر من 22 عاماً",
     template: "%s | مصنع التقوى للألوميتال والمطابخ"
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ar_EG",
-    url: "https://altaqwafactory.com",
+    url: "https://altaqwa-factory.vercel.app",
     title: "مصنع التقوى للألوميتال والمطابخ - فخامة التنفيذ وجودة الصناعة",
     description: "أفضل مصنع لتفصيل مطابخ الألوميتال وغرف الدريسنج في مصر. خبرة 22 عاماً وضمان 20 سنة.",
     siteName: "مصنع التقوى للألوميتال",
