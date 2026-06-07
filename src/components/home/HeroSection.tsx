@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[100dvh] flex items-center justify-start md:justify-center pt-0 pb-12 md:pb-20 overflow-hidden w-full max-w-[100vw] overflow-x-hidden">
+    <section className="relative w-full max-w-full overflow-hidden pt-32 pb-12 md:pt-40 flex flex-col items-center justify-center min-h-[100dvh]">
       {/* Optimized Background Image for LCP */}
       <div className="absolute inset-0 z-0">
         <Image 
@@ -21,7 +21,7 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-black-pure/95 via-black-pure/70 to-black-pure/98 z-10"></div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-20 flex flex-col items-center text-center mt-32 md:mt-0">
+      <div className="container mx-auto px-4 md:px-6 relative z-20 flex flex-col items-center text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
