@@ -49,7 +49,7 @@ export default function Home() {
       <ServicesPreview />
       
       {/* Featured Projects Summary */}
-      <section className="py-24 bg-black-rich border-t border-white/5 relative">
+      <section className="py-24 bg-black-rich border-t border-white/5 relative overflow-hidden">
         <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-gold-500/10 blur-[100px] rounded-full pointer-events-none"></div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
           <h2 className="text-sm font-bold text-gold-500 uppercase tracking-widest mb-3">سابقة أعمالنا</h2>

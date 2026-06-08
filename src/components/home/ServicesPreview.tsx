@@ -13,12 +13,12 @@ export default function ServicesPreview() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-12 md:py-16 lg:py-24 bg-black-rich relative" id="services-preview">
+    <section className="py-12 md:py-16 lg:py-24 bg-black-rich relative overflow-hidden" id="services-preview">
       <div className="container mx-auto px-4 md:px-6 relative z-10" ref={ref}>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16">
           <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6 }}
             className="max-w-2xl"
           >
@@ -28,8 +28,8 @@ export default function ServicesPreview() {
             </h3>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="hidden sm:block"
           >

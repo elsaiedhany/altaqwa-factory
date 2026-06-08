@@ -22,8 +22,8 @@ export default function WhyChooseUs() {
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           
           <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8 }}
             className="w-full lg:w-1/2 order-2 lg:order-1"
           >
@@ -51,8 +51,8 @@ export default function WhyChooseUs() {
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8 }}
             className="w-full lg:w-1/2 order-1 lg:order-2"
           >
@@ -104,3 +104,4 @@ export default function WhyChooseUs() {
     </section>
   );
 }
+

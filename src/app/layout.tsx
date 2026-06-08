@@ -80,7 +80,7 @@ export default function RootLayout({
       <head>
         <SchemaMarkup />
       </head>
-      <body className={`${cairo.variable} font-sans bg-black-pure text-foreground antialiased selection:bg-gold-500/30 selection:text-gold-100 min-h-screen flex flex-col`}>
+      <body className={`${cairo.variable} font-sans bg-black-pure text-foreground antialiased selection:bg-gold-500/30 selection:text-gold-100 min-h-screen flex flex-col overflow-x-hidden`}>
         <Navbar />
         <main className="flex-grow">
           {children}
