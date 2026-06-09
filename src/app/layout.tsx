@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import FloatingContact from "@/components/ui/FloatingContact";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import SchemaMarkup from "@/components/layout/SchemaMarkup";
+import { Analytics } from '@vercel/analytics/next';
 
 const cairo = Cairo({ 
   subsets: ["arabic", "latin"],
@@ -88,6 +89,7 @@ export default function RootLayout({
         <Footer />
         <FloatingContact />
         <FloatingWhatsApp />
+        <Analytics />
       </body>
     </html>
   );
