@@ -1,13 +1,13 @@
-"use client";
+﻿"use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, PhoneCall } from "lucide-react";
-import Image from "next/image";
+import { Menu, PhoneCall, X } from "lucide-react";
+import { MEDIA } from "@/data/mediaRegistry";
 import { navLinks, siteInfo } from "@/data/siteData";
 import { cn } from "@/lib/utils";
-import { MEDIA } from "@/data/mediaRegistry";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,142 +15,48 @@ export default function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 16);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header 
-      className={cn(
-        "fixed top-0 left-0 right-0 z-[100] transition-all duration-500",
-        isScrolled 
-          ? "bg-black-pure/95 backdrop-blur-xl border-b border-white/5 py-2 md:py-3 shadow-2xl shadow-black" 
-          : "bg-gradient-to-b from-black-pure/90 to-transparent py-4 md:py-6"
-      )}
-    >
-      <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-        {/* Professional Image Logo */}
-        <Link href="/" className="flex items-center gap-2 md:gap-3 group">
-          <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl overflow-hidden border-2 border-gold-500/50 shadow-lg shadow-gold-500/20 group-hover:shadow-gold-500/40 transition-all transform group-hover:scale-105 active:scale-95">
-            <Image 
-              src={MEDIA.services.kitchens}
-              alt={siteInfo.name}
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xl md:text-2xl font-black text-white tracking-tighter leading-none group-hover:text-gold-400 transition-colors uppercase">التقوى</span>
-            <span className="text-[8px] md:text-[10px] text-gold-500 font-black tracking-[0.15em] md:tracking-[0.2em] uppercase">Aluminum & Kitchens</span>
-          </div>
+    <header className={cn("fixed inset-x-0 top-0 z-50 transition", isScrolled ? "border-b border-white/10 bg-black-pure/92 py-3 shadow-2xl backdrop-blur-xl" : "bg-gradient-to-b from-black-pure/85 to-transparent py-5")}>
+      <div className="container mx-auto flex items-center justify-between px-4 md:px-6">
+        <Link href="/" className="flex items-center gap-3" aria-label="العودة إلى الصفحة الرئيسية">
+          <span className="relative h-11 w-11 overflow-hidden rounded-xl border border-gold-500/50 md:h-12 md:w-12">
+            <Image src={MEDIA.services.kitchens} alt="" fill className="object-cover" sizes="48px" priority />
+          </span>
+          <span className="leading-none">
+            <span className="block text-2xl font-black text-white">التقوى</span>
+            <span className="mt-1 block text-[10px] font-black uppercase tracking-[.24em] text-gold-500">Aluminum & Kitchens</span>
+          </span>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden xl:flex items-center gap-1 bg-white/5 border border-white/10 rounded-full px-2 py-1 backdrop-blur-md">
+        <nav className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.04] p-1 xl:flex" aria-label="التنقل الرئيسي">
           {navLinks.map((link) => {
             const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
-            return (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={cn(
-                  "px-5 py-2.5 text-xs font-black rounded-full transition-all duration-300 tracking-wide",
-                  isActive 
-                    ? "text-black-pure bg-gold-500 shadow-lg shadow-gold-500/20" 
-                    : "text-gray-400 hover:text-white hover:bg-white/5"
-                )}
-              >
-                {link.name}
-              </Link>
-            );
+            return <Link key={link.href} href={link.href} className={cn("rounded-full px-4 py-2 text-sm font-bold transition", isActive ? "bg-gold-500 text-black-pure" : "text-gray-300 hover:bg-white/10 hover:text-white")}>{link.name}</Link>;
           })}
         </nav>
 
-        {/* Desktop CTA */}
-        <div className="hidden lg:flex items-center gap-6">
-          <a 
-            href={`tel:${siteInfo.phone}`}
-            className="flex flex-col items-end group"
-          >
-            <span className="text-[10px] text-gray-500 font-bold tracking-widest uppercase mb-0.5">اتصل بنا الآن</span>
-            <div className="flex items-center gap-2 text-xl font-black text-white group-hover:text-gold-500 transition-colors dir-ltr tracking-tighter">
-              <PhoneCall className="w-5 h-5 text-gold-500 animate-pulse" />
-              <span>{siteInfo.phone}</span>
-            </div>
-          </a>
-          <Link
-            href="/quote"
-            className="bg-gold-500 hover:bg-gold-400 text-black-pure font-black py-3 px-8 rounded-full transition-all duration-300 shadow-lg shadow-gold-500/20 hover:shadow-gold-500/40 hover:-translate-y-0.5 text-sm uppercase tracking-tighter"
-          >
-            اطلب تسعير
-          </Link>
+        <div className="hidden items-center gap-4 lg:flex">
+          <a href={`tel:${siteInfo.phone}`} className="text-left font-black text-white hover:text-gold-400" dir="ltr">{siteInfo.phone}</a>
+          <Link href="/quote" className="rounded-full bg-gold-500 px-6 py-3 font-black text-black-pure hover:bg-gold-400">طلب تسعير</Link>
         </div>
 
-        {/* Mobile Toggle & Phone Icon */}
-        <div className="flex items-center gap-2 md:gap-4 lg:hidden">
-          <a href={`tel:${siteInfo.phone}`} className="p-2.5 md:p-3 rounded-lg md:rounded-xl bg-gold-500 text-black-pure shadow-lg shadow-gold-500/20 active:scale-95 transition-transform">
-            <PhoneCall className="w-5 h-5 md:w-6 md:h-6" />
-          </a>
-          <button 
-            className="p-2.5 md:p-3 rounded-lg md:rounded-xl bg-white/5 text-gray-300 border border-white/10 active:scale-95 transition-transform"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X className="w-5 h-5 md:w-6 md:h-6" /> : <Menu className="w-5 h-5 md:w-6 md:h-6" />}
-          </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <a href={`tel:${siteInfo.phone}`} className="rounded-xl bg-gold-500 p-3 text-black-pure" aria-label="اتصل الآن"><PhoneCall className="h-5 w-5" /></a>
+          <button type="button" className="rounded-xl border border-white/10 bg-white/10 p-3 text-white" onClick={() => setIsOpen((value) => !value)} aria-expanded={isOpen} aria-controls="mobile-menu" aria-label={isOpen ? "إغلاق القائمة" : "فتح القائمة"}>{isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <div 
-        className={cn(
-          "fixed inset-0 top-0 left-0 w-full h-screen bg-black-pure/98 backdrop-blur-3xl z-[90] lg:hidden transition-all duration-500 ease-in-out overflow-hidden",
-          isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"
-        )}
-      >
-        <div className="flex flex-col h-full overflow-y-auto pb-20 p-6 md:p-8 gap-8 md:gap-10 pt-24 md:pt-28">
-          <nav className="flex flex-col gap-1 md:gap-2">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className={cn(
-                    "text-xl md:text-2xl font-black p-4 rounded-xl md:rounded-2xl transition-all flex items-center justify-between group",
-                    isActive 
-                      ? "text-gold-500 bg-gold-500/5 border border-gold-500/20 px-6" 
-                      : "text-gray-400 hover:text-white"
-                  )}
-                >
-                  <span>{link.name}</span>
-                  <div className={cn("w-1.5 h-1.5 rounded-full bg-gold-500 scale-0 group-hover:scale-100 transition-transform", isActive && "scale-100")}></div>
-                </Link>
-              );
-            })}
-          </nav>
-          
-          <div className="mt-auto flex flex-col gap-4 md:gap-6">
-            <a 
-              href={`tel:${siteInfo.phone}`}
-              className="flex items-center justify-center gap-3 md:gap-4 p-5 md:p-6 rounded-2xl md:rounded-[2rem] bg-gold-500 text-black-pure font-black text-xl md:text-2xl shadow-2xl shadow-gold-500/20 border border-gold-400"
-            >
-              <PhoneCall className="w-6 h-6 md:w-8 md:h-8" />
-              <span className="tracking-tighter dir-ltr">{siteInfo.phone}</span>
-            </a>
-            <Link
-              href="/quote"
-              onClick={() => setIsOpen(false)}
-              className="flex items-center justify-center p-5 md:p-6 rounded-2xl md:rounded-[2rem] bg-white/5 text-white font-black text-lg md:text-xl border border-white/10"
-            >
-              اطلب عرض سعر مجاني
-            </Link>
-          </div>
-        </div>
+      <div id="mobile-menu" className={cn("fixed inset-0 top-0 z-40 bg-black-pure/98 pt-24 transition lg:hidden", isOpen ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-full opacity-0")}>
+        <nav className="container mx-auto flex flex-col gap-2 px-4" aria-label="قائمة الجوال">
+          {navLinks.map((link) => <Link key={link.href} href={link.href} onClick={() => setIsOpen(false)} className="rounded-2xl border border-white/10 px-5 py-4 text-xl font-black text-white">{link.name}</Link>)}
+          <Link href="/quote" onClick={() => setIsOpen(false)} className="mt-4 rounded-2xl bg-gold-500 px-5 py-4 text-center text-xl font-black text-black-pure">اطلب مقايسة مجانية</Link>
+        </nav>
       </div>
     </header>
   );

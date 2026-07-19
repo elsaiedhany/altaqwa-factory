@@ -1,144 +1,84 @@
+﻿import Image from "next/image";
 import Link from "next/link";
-import { Phone, MapPin, Clock } from "lucide-react";
-import Image from "next/image";
-import { siteInfo, navLinks, servicesList } from "@/data/siteData";
+import { Clock, MapPin, Phone } from "lucide-react";
 import { MEDIA } from "@/data/mediaRegistry";
-
-const FacebookIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-);
-
-const InstagramIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16.11 7.5v-.01"/><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/></svg>
-);
+import { navLinks, servicesList, siteInfo } from "@/data/siteData";
 
 export default function Footer() {
   return (
-    <footer className="bg-black-rich border-t border-white/5 pt-16 pb-8 relative overflow-hidden">
-      {/* Decorative gradient */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[1px] bg-gradient-to-r from-transparent via-gold-500/50 to-transparent"></div>
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-gold-500/5 blur-[120px] rounded-full pointer-events-none"></div>
-
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          
-          {/* Brand Info */}
-          <div className="flex flex-col gap-6">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-12 h-12 rounded-xl overflow-hidden border-2 border-gold-500/50 shadow-lg shadow-gold-500/20 group-hover:shadow-gold-500/40 transition-all">
-                <Image 
-                  src={MEDIA.services.kitchens}
-                  alt={siteInfo.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-2xl font-black text-white tracking-tighter leading-none group-hover:text-gold-400 transition-colors uppercase">التقوى</span>
-                <span className="text-[10px] text-gold-500 font-black tracking-[0.2em] uppercase leading-tight mt-1">Aluminum & Kitchens</span>
-              </div>
+    <footer className="border-t border-white/10 bg-black-rich py-14">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <Link href="/" className="flex items-center gap-3">
+              <span className="relative h-12 w-12 overflow-hidden rounded-xl border border-gold-500/50">
+                <Image src={MEDIA.services.kitchens} alt="" fill className="object-cover" sizes="48px" />
+              </span>
+              <span>
+                <span className="block text-2xl font-black text-white">التقوى</span>
+                <span className="block text-[10px] font-black uppercase tracking-[.22em] text-gold-500">Aluminum & Kitchens</span>
+              </span>
             </Link>
-            <p className="text-gray-400 leading-relaxed text-sm">
-              مصنع التقوى للألوميتال والمطابخ - خبرة أكثر من 22 عاماً في تصنيع وتوريد المطابخ والألوميتال بأعلى معايير الجودة والالتزام التام بالمواعيد.
+            <p className="mt-5 leading-8 text-gray-400">
+              {siteInfo.name} يقدم مطابخ ودريسنج وشبابيك وأبواب ألوميتال بتصنيع مباشر وتشطيب فاخر وضمان حقيقي.
             </p>
-            
-            {/* Local SEO Section */}
-            <div className="mt-2">
-              <a 
-                href={`https://www.google.com/search?q=${encodeURIComponent("شركة التقوى للأعمال الالومنيوم هاني الفقي")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-gold-500/50 hover:bg-gold-500/5 transition-all group"
-              >
-                <div className="w-8 h-8 rounded-full bg-gold-500 flex items-center justify-center text-black-pure shadow-lg shadow-gold-500/20">
-                  <MapPin className="w-4 h-4" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-xs text-gray-500 font-bold uppercase tracking-widest leading-none mb-1">تجدنا على خرائط جوجل</span>
-                  <span className="text-sm text-white font-bold group-hover:text-gold-400 transition-colors">شركة التقوى - هاني الفقي</span>
-                </div>
-              </a>
-            </div>
-
-            <div className="flex items-center gap-4 mt-2">
-              <a href={siteInfo.socials.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gold-500 hover:border-gold-500 transition-all duration-300">
-                <FacebookIcon className="w-5 h-5" />
-              </a>
-              <a href={siteInfo.socials.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gold-500 hover:border-gold-500 transition-all duration-300">
-                <InstagramIcon className="w-5 h-5" />
-              </a>
+            <div className="mt-6 flex gap-3">
+              <a href={siteInfo.socials.facebook} target="_blank" rel="noopener noreferrer" aria-label="فيسبوك" className="rounded-full border border-white/10 p-3 text-gray-300 hover:border-gold-500 hover:text-gold-400"><FacebookIcon className="h-5 w-5" /></a>
+              <a href={siteInfo.socials.instagram} target="_blank" rel="noopener noreferrer" aria-label="إنستجرام" className="rounded-full border border-white/10 p-3 text-gray-300 hover:border-gold-500 hover:text-gold-400"><InstagramIcon className="h-5 w-5" /></a>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="flex flex-col gap-6">
-            <h3 className="text-lg font-bold text-white relative inline-block">
-              روابط سريعة
-              <span className="absolute -bottom-2 right-0 w-8 h-1 bg-gold-500 rounded-full"></span>
-            </h3>
-            <ul className="flex flex-col gap-3">
-              {navLinks.slice(0, 5).map((link) => (
-                <li key={link.name}>
-                  <Link href={link.href} className="text-gray-400 hover:text-gold-400 transition-colors text-sm flex items-center gap-2 group">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gold-500/50 group-hover:bg-gold-400 transition-colors"></span>
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <FooterList title="روابط سريعة" items={navLinks.slice(0, 6).map((link) => ({ label: link.name, href: link.href }))} />
+          <FooterList title="الخدمات" items={servicesList.slice(0, 6).map((service) => ({ label: service.title, href: `/services#${service.id}` }))} />
 
-          {/* Services */}
-          <div className="flex flex-col gap-6">
-            <h3 className="text-lg font-bold text-white relative inline-block">
-              خدماتنا
-              <span className="absolute -bottom-2 right-0 w-8 h-1 bg-gold-500 rounded-full"></span>
-            </h3>
-            <ul className="flex flex-col gap-3">
-              {servicesList.slice(0, 5).map((service) => (
-                <li key={service.id}>
-                  <Link href={`/services#${service.id}`} className="text-gray-400 hover:text-gold-400 transition-colors text-sm flex items-center gap-2 group">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gold-500/50 group-hover:bg-gold-400 transition-colors"></span>
-                    {service.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div className="flex flex-col gap-6">
-            <h3 className="text-lg font-bold text-white relative inline-block">
-              تواصل معنا
-              <span className="absolute -bottom-2 right-0 w-8 h-1 bg-gold-500 rounded-full"></span>
-            </h3>
-            <ul className="flex flex-col gap-4">
-              <li className="flex items-start gap-3 text-gray-400 text-sm">
-                <MapPin className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" />
-                <span className="leading-relaxed">{siteInfo.location}</span>
-              </li>
-              <li className="flex items-center gap-3 text-gray-400 text-sm">
-                <Phone className="w-5 h-5 text-gold-500 shrink-0" />
-                <a href={`tel:${siteInfo.phone}`} className="hover:text-gold-400 transition-colors dir-ltr tracking-wider">{siteInfo.phone}</a>
-              </li>
-              <li className="flex items-start gap-3 text-gray-400 text-sm">
-                <Clock className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" />
-                <span className="leading-relaxed">{siteInfo.workingHours}</span>
-              </li>
+          <div>
+            <h2 className="text-lg font-black text-white">تواصل معنا</h2>
+            <ul className="mt-5 space-y-4 text-gray-400">
+              <li className="flex gap-3"><MapPin className="mt-1 h-5 w-5 shrink-0 text-gold-500" /><span>{siteInfo.location}</span></li>
+              <li className="flex gap-3"><Phone className="h-5 w-5 shrink-0 text-gold-500" /><a href={`tel:${siteInfo.phone}`} dir="ltr" className="hover:text-gold-400">{siteInfo.phone}</a></li>
+              <li className="flex gap-3"><Clock className="mt-1 h-5 w-5 shrink-0 text-gold-500" /><span>{siteInfo.workingHours}</span></li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Footer */}
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-gray-500 text-sm text-center md:text-right">
-            جميع الحقوق محفوظة &copy; {new Date().getFullYear()} {siteInfo.name}.
-          </p>
-          <div className="text-gray-500 text-sm flex items-center gap-1">
-            <span>صناعة مصرية متميزة</span>
-          </div>
+        <div className="mt-12 border-t border-white/10 pt-6 text-center text-sm text-gray-500 md:flex md:items-center md:justify-between md:text-right">
+          <p>جميع الحقوق محفوظة © {new Date().getFullYear()} {siteInfo.name}.</p>
+          <p className="mt-2 md:mt-0">صناعة مصرية بتفاصيل هندسية فاخرة.</p>
         </div>
       </div>
     </footer>
+  );
+}
+
+function FacebookIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  );
+}
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect width="20" height="20" x="2" y="2" rx="5" />
+      <path d="M16.5 7.5h.01" />
+      <circle cx="12" cy="12" r="3.5" />
+    </svg>
+  );
+}
+
+function FooterList({ title, items }: { title: string; items: { label: string; href: string }[] }) {
+  return (
+    <div>
+      <h2 className="text-lg font-black text-white">{title}</h2>
+      <ul className="mt-5 space-y-3">
+        {items.map((item) => (
+          <li key={item.href}>
+            <Link href={item.href} className="text-gray-400 hover:text-gold-400">{item.label}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

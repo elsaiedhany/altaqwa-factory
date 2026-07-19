@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+﻿import type { Metadata, Viewport } from "next";
 import { Cairo } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
@@ -6,86 +6,64 @@ import Footer from "@/components/layout/Footer";
 import FloatingContact from "@/components/ui/FloatingContact";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import SchemaMarkup from "@/components/layout/SchemaMarkup";
-import { Analytics } from '@vercel/analytics/next';
+import { Analytics } from "@vercel/analytics/next";
+import { siteInfo } from "@/data/siteData";
 
-const cairo = Cairo({ 
+const cairo = Cairo({
   subsets: ["arabic", "latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-cairo",
-  display: 'swap',
+  display: "swap",
 });
 
+const ogImage = "/assets/images/kitchen-luxury-cream-gold-1.jpg.jpg";
+
 export const viewport: Viewport = {
-  themeColor: '#050505',
-  width: 'device-width',
+  themeColor: "#050505",
+  width: "device-width",
   initialScale: 1,
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://altaqwa-factory.vercel.app'),
+  metadataBase: new URL(siteInfo.url),
   title: {
-    default: "مصنع التقوى للألوميتال والمطابخ - خبرة أكثر من 22 عاماً",
-    template: "%s | مصنع التقوى للألوميتال والمطابخ"
+    default: `${siteInfo.name} | مطابخ ألوميتال وبولي لاك فاخرة`,
+    template: `%s | ${siteInfo.shortName}`,
   },
-  description: "أفضل مصنع لتصنيع مطابخ الألوميتال، البولي لاك (Polylac)، الأكريليك، غرف الدريسنج، والشبابيك في مصر. خبرة أكثر من 22 عاماً في التصنيع المباشر والتركيب الاحترافي بضمان حقيقي.",
-  keywords: ["مطابخ بولي لاك المنصورة", "تصنيع مطابخ أكريليك", "مصنع مطابخ ألوميتال", "مطابخ ألوميتال الدقهلية", "غرف دريسنج مودرن", "شبابيك ألوميتال جامبو", "أبواب ألوميتال", "مصنع التقوى", "المهندس هاني الفقي"],
-  authors: [{ name: "مصنع التقوى" }],
-  creator: "مصنع التقوى",
-  publisher: "مصنع التقوى",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
+  description:
+    "مصنع متخصص في تصميم وتصنيع وتركيب مطابخ الألوميتال والبولي لاك، الدريسنج روم، الشبابيك والأبواب في الدقهلية وكل مصر.",
+  keywords: siteInfo.seoKeywords,
+  authors: [{ name: siteInfo.owner }],
+  creator: siteInfo.shortName,
+  publisher: siteInfo.shortName,
+  formatDetection: { email: false, address: false, telephone: false },
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "ar_EG",
-    url: "https://altaqwa-factory.vercel.app",
-    title: "مصنع التقوى للألوميتال والمطابخ - فخامة التنفيذ وجودة الصناعة",
-    description: "أفضل مصنع لتفصيل مطابخ الألوميتال وغرف الدريسنج في مصر. خبرة 22 عاماً وضمان 20 سنة.",
-    siteName: "مصنع التقوى للألوميتال",
-    images: [
-      {
-        url: "/assets/images/kitchen-luxury-cream-gold-1.jpg.jpg",
-        width: 1200,
-        height: 630,
-        alt: "مطابخ ألوميتال فاخرة - مصنع التقوى",
-      },
-    ],
+    url: siteInfo.url,
+    siteName: siteInfo.name,
+    title: `${siteInfo.name} | تنفيذ فاخر بضمان حقيقي`,
+    description: "مطابخ ودريسنج وشبابيك ألوميتال بتصنيع مباشر وخبرة أكثر من 22 عاما.",
+    images: [{ url: ogImage, width: 1200, height: 630, alt: "مطبخ فاخر من مصنع التقوى" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "مصنع التقوى للألوميتال والمطابخ",
-    description: "خبرة 22 عاماً في تصنيع مطابخ الألوميتال والشبابيك والأبواب في مصر.",
-    images: ["/assets/images/kitchen-luxury-cream-gold-1.jpg.jpg"],
+    title: siteInfo.name,
+    description: "تصنيع وتركيب مطابخ ألوميتال وبولي لاك بخبرة أكثر من 22 عاما.",
+    images: [ogImage],
   },
-  alternates: {
-    canonical: '/',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  verification: {
-    google: "MluI1cMmVOtczCvma-OfhCohDZJeizF_mi4bOvQpGxo",
-  },
+  robots: { index: true, follow: true },
+  verification: { google: "MluI1cMmVOtczCvma-OfhCohDZJeizF_mi4bOvQpGxo" },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ar" dir="rtl" className="dark scroll-smooth">
-      <head>
+      <body className={`${cairo.variable} min-h-screen overflow-x-hidden bg-black-pure font-sans text-foreground antialiased selection:bg-gold-500/30 selection:text-gold-100`}>
         <SchemaMarkup />
-      </head>
-      <body className={`${cairo.variable} font-sans bg-black-pure text-foreground antialiased selection:bg-gold-500/30 selection:text-gold-100 min-h-screen flex flex-col overflow-x-hidden`}>
         <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
+        <main>{children}</main>
         <Footer />
         <FloatingContact />
         <FloatingWhatsApp />
