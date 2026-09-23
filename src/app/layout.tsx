@@ -1,10 +1,9 @@
-﻿import type { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cairo } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FloatingContact from "@/components/ui/FloatingContact";
-import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import SchemaMarkup from "@/components/layout/SchemaMarkup";
 import { Analytics } from "@vercel/analytics/next";
 import { siteInfo } from "@/data/siteData";
@@ -32,7 +31,17 @@ export const metadata: Metadata = {
   },
   description:
     "مصنع متخصص في تصميم وتصنيع وتركيب مطابخ الألوميتال والبولي لاك، الدريسنج روم، الشبابيك والأبواب في الدقهلية وكل مصر.",
-  keywords: siteInfo.seoKeywords,
+  keywords: [
+    ...siteInfo.seoKeywords,
+    "مصنع مطابخ بالمنصورة",
+    "مطابخ بولي لاك تركي",
+    "اسعار مطابخ الالوميتال 2025",
+    "اسعار مطابخ البولي لاك في مصر",
+    "مطابخ كلادينج الدقهلية",
+    "دريسنج روم المنصورة",
+    "شبابيك ألوميتال جامبو عازل للصوت",
+    "هاني توفيق الفقي",
+  ],
   authors: [{ name: siteInfo.owner }],
   creator: siteInfo.shortName,
   publisher: siteInfo.shortName,
@@ -43,8 +52,8 @@ export const metadata: Metadata = {
     locale: "ar_EG",
     url: siteInfo.url,
     siteName: siteInfo.name,
-    title: `${siteInfo.name} | تنفيذ فاخر بضمان حقيقي`,
-    description: "مطابخ ودريسنج وشبابيك ألوميتال بتصنيع مباشر وخبرة أكثر من 22 عاما.",
+    title: `${siteInfo.name} | تنفيذ فاخر بضمان حقيقي 20 سنة`,
+    description: "مطابخ ودريسنج وشبابيك ألوميتال بتصنيع مباشر وخبرة أكثر من 22 عاما بإشراف م/ هاني توفيق الفقي.",
     images: [{ url: ogImage, width: 1200, height: 630, alt: "مطبخ فاخر من مصنع التقوى" }],
   },
   twitter: {
@@ -53,7 +62,23 @@ export const metadata: Metadata = {
     description: "تصنيع وتركيب مطابخ ألوميتال وبولي لاك بخبرة أكثر من 22 عاما.",
     images: [ogImage],
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  other: {
+    "geo.region": "EG-DK",
+    "geo.placename": "Al-Sinbillawain, Mansoura, Dakahlia",
+    "geo.position": "30.82886;31.54580",
+    ICBM: "30.82886, 31.54580",
+  },
   verification: { google: "MluI1cMmVOtczCvma-OfhCohDZJeizF_mi4bOvQpGxo" },
 };
 
@@ -66,7 +91,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main>{children}</main>
         <Footer />
         <FloatingContact />
-        <FloatingWhatsApp />
         <Analytics />
       </body>
     </html>

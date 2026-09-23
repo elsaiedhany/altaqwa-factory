@@ -3,148 +3,110 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronRight, ChevronLeft, Maximize2 } from "lucide-react";
+import { Maximize2, Sparkles } from "lucide-react";
+import LightboxModal, { LightboxItem } from "@/components/ui/LightboxModal";
 
 interface GalleryImage {
   src: string;
   category: string;
+  alt?: string;
+  title?: string;
 }
 
 export default function GalleryGrid({ images }: { images: GalleryImage[] }) {
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const [filter, setFilter] = useState("الكل");
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const [activeFilter, setActiveFilter] = useState("الكل");
 
-  const categories = ["الكل", ...new Set(images.map(img => img.category))];
-  
-  const filteredImages = filter === "الكل" 
-    ? images 
-    : images.filter(img => img.category === filter);
+  const categories = ["الكل", ...new Set(images.map((img) => img.category))];
 
-  const openLightbox = (index: number) => setSelectedImage(index);
-  const closeLightbox = () => setSelectedImage(null);
-  
-  const nextImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (selectedImage !== null) {
-      setSelectedImage((selectedImage + 1) % filteredImages.length);
-    }
-  };
+  const filteredImages =
+    activeFilter === "الكل" ? images : images.filter((img) => img.category === activeFilter);
 
-  const prevImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (selectedImage !== null) {
-      setSelectedImage((selectedImage - 1 + filteredImages.length) % filteredImages.length);
-    }
-  };
+  const lightboxItems: LightboxItem[] = filteredImages.map((img) => ({
+    src: img.src,
+    alt: img.alt || `عمل من مصنع التقوى - ${img.category}`,
+    title: img.title || `${img.category} - تشطيب مصنع التقوى`,
+    category: img.category,
+  }));
 
   return (
     <>
-      {/* Category Filter */}
-      <div className="flex flex-wrap justify-center gap-2 mb-12">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setFilter(cat)}
-            className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-              filter === cat 
-                ? "bg-gold-500 text-black-pure shadow-lg shadow-gold-500/20" 
-                : "bg-white/5 text-gray-400 hover:bg-white/10 border border-white/10"
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
+      {/* Category Filter Tabs */}
+      <div className="mb-10 flex flex-wrap items-center justify-center gap-2">
+        {categories.map((cat) => {
+          const isActive = activeFilter === cat;
+          return (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => {
+                setActiveFilter(cat);
+                setSelectedImageIndex(null);
+              }}
+              className={`rounded-full px-5 py-2.5 text-sm font-black transition-all duration-300 ${
+                isActive
+                  ? "bg-gold-500 text-black-pure shadow-lg shadow-gold-500/20 scale-105"
+                  : "border border-white/10 bg-white/[0.04] text-gray-300 hover:border-gold-500/40 hover:bg-white/10 hover:text-white"
+              }`}
+            >
+              {cat}
+            </button>
+          );
+        })}
       </div>
 
       {/* Grid */}
-      <motion.div 
+      <motion.div
         layout
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+        className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       >
         <AnimatePresence mode="popLayout">
           {filteredImages.map((image, index) => (
             <motion.div
-              key={image.src}
+              key={image.src + index}
               layout
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
+              exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.3 }}
-              className="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer border border-white/10 hover:border-gold-500/30 transition-all"
-              onClick={() => openLightbox(index)}
+              className="group relative aspect-square cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-black-rich transition-all duration-500 hover:border-gold-500/50 hover:shadow-[0_10px_30px_rgba(209,141,24,0.15)]"
+              onClick={() => setSelectedImageIndex(index)}
             >
-                <Image 
+              <Image
                 src={image.src}
-                alt={`${image.category} - من تنفيذ مصنع التقوى`}
+                alt={image.alt || `${image.category} - من تنفيذ مصنع التقوى`}
                 fill
-                className="object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
               />
-              <div className="absolute inset-0 bg-black-pure/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gold-500 flex items-center justify-center text-black-pure scale-50 group-hover:scale-100 transition-transform duration-500">
-                  <Maximize2 className="w-6 h-6" />
-                </div>
-                <span className="text-white font-bold tracking-wider">{image.category}</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black-pure/90 via-black-pure/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+              <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 transition-all duration-300 group-hover:opacity-100">
+                <span className="inline-flex items-center gap-1 rounded-full bg-gold-500 px-2.5 py-0.5 text-[11px] font-black text-black-pure">
+                  <Sparkles className="h-3 w-3" />
+                  {image.category}
+                </span>
+                <p className="mt-2 text-xs font-bold text-gray-200">انقر للمعاينة والتكبير</p>
+              </div>
+
+              <div className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-black-pure/70 text-white opacity-0 backdrop-blur transition-all duration-300 group-hover:opacity-100 group-hover:scale-100 scale-75">
+                <Maximize2 className="h-4 w-4 text-gold-400" />
               </div>
             </motion.div>
           ))}
         </AnimatePresence>
       </motion.div>
 
-      {/* Lightbox */}
-      <AnimatePresence>
-        {selectedImage !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black-pure/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-10"
-            onClick={closeLightbox}
-          >
-            <button 
-              className="absolute top-6 right-6 p-2 text-white/50 hover:text-white transition-colors z-[110]"
-              onClick={closeLightbox}
-            >
-              <X className="w-8 h-8" />
-            </button>
-
-            <button 
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-4 text-white/50 hover:text-gold-500 transition-all z-[110]"
-              onClick={nextImage}
-            >
-              <ChevronRight className="w-10 h-10" />
-            </button>
-
-            <button 
-              className="absolute left-4 top-1/2 -translate-y-1/2 p-4 text-white/50 hover:text-gold-500 transition-all z-[110]"
-              onClick={prevImage}
-            >
-              <ChevronLeft className="w-10 h-10" />
-            </button>
-
-            <motion.div 
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full h-full max-w-5xl max-h-[80vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image 
-                src={filteredImages[selectedImage].src}
-                alt={`معاينة عمل ${filteredImages[selectedImage].category} - مصنع التقوى`}
-                fill
-                className="object-contain"
-                priority
-                sizes="(max-width: 1280px) 100vw, 1280px"
-              />
-              <div className="absolute -bottom-12 left-0 right-0 text-center">
-                <span className="text-gold-500 font-bold text-lg">{filteredImages[selectedImage].category}</span>
-                <p className="text-gray-500 text-sm mt-1">صورة {selectedImage + 1} من {filteredImages.length}</p>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Reusable Lightbox Modal */}
+      {selectedImageIndex !== null && (
+        <LightboxModal
+          images={lightboxItems}
+          currentIndex={selectedImageIndex}
+          isOpen={selectedImageIndex !== null}
+          onClose={() => setSelectedImageIndex(null)}
+          onIndexChange={(newIndex) => setSelectedImageIndex(newIndex)}
+        />
+      )}
     </>
   );
 }

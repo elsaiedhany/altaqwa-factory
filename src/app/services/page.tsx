@@ -1,133 +1,65 @@
-import { siteInfo, servicesList } from "@/data/siteData";
-import { CheckCircle2, PhoneCall, MessageCircle, ArrowLeft } from "lucide-react";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowLeft, CheckCircle2, MessageCircle, PhoneCall } from "lucide-react";
+import PageHeader, { PrimaryLink, SecondaryAnchor } from "@/components/shared/PageHeader";
+import { servicesList, siteInfo } from "@/data/siteData";
 
-export const metadata = {
-  title: `خدماتنا | تصنيع مطابخ ألوميتال، تصميم 3D، وتوريد وتركيب`,
-  description: "خدمات مصنع التقوى: تصميم مطابخ ألوميتال فاخرة تحت إشراف المهندس هاني توفيق. نوفر خدمة تصميم 3D وتوريد وتركيب لجميع المحافظات بأعلى جودة وضمان 20 عاماً."
+export const metadata: Metadata = {
+  title: "خدماتنا | مطابخ ألوميتال وبولي لاك وتصميم 3D",
+  description: "خدمات مصنع التقوى تشمل تصميم وتصنيع وتركيب المطابخ، الدريسنج، الشبابيك والأبواب مع معاينة دقيقة وضمان حقيقي.",
+  alternates: { canonical: "/services" },
 };
+
+const guarantees = ["خامات معتمدة ومناسبة للاستخدام اليومي", "رفع مقاسات دقيق قبل التصنيع", "تصميم واضح قبل التنفيذ", "تركيب منظم وخدمة ما بعد البيع"];
 
 export default function ServicesPage() {
   return (
-    <div className="pt-24 pb-12 md:pb-20">
-      {/* Page Header */}
-      <section className="bg-black-rich py-10 md:py-16 lg:py-20 relative overflow-hidden border-b border-white/5">
-        <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-gold-500/10 blur-[100px] rounded-full pointer-events-none"></div>
-        <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
-          <h1 className="text-3xl md:text-5xl lg:text-7xl font-black text-white mb-6 uppercase tracking-tight leading-tight">خدماتنا الاحترافية</h1>
-          <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto text-balance font-medium leading-relaxed">
-            نقدم حلولاً هندسية متكاملة في صناعة الألوميتال، نصممها بأحدث تقنيات الـ 3D وننفذها بدقة الماكينات لتدوم طويلاً.
-          </p>
-        </div>
-      </section>
+    <div className="bg-black-pure">
+      <PageHeader
+        eyebrow="خدمات مصنع التقوى"
+        title="كل ما يحتاجه مشروعك من التصميم حتى التركيب"
+        description="ننفذ المطابخ، الدريسنج، الشبابيك، والأبواب بمنهج واضح: قياس مضبوط، خامة مناسبة، تصنيع مباشر، وتسليم محترف."
+        actions={<><PrimaryLink href="/quote">اطلب مقايسة مجانية</PrimaryLink><SecondaryAnchor href={`tel:${siteInfo.phone}`}>اتصل الآن</SecondaryAnchor></>}
+      />
 
-      {/* Services List */}
-      <section className="py-12 md:py-16 lg:py-24 bg-black-pure">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-16 md:mb-24">
-            <h2 className="text-sm font-bold text-gold-500 uppercase tracking-widest mb-3 font-black">ماذا نقدم لعملائنا؟</h2>
-            <h3 className="text-2xl md:text-4xl lg:text-5xl font-black text-white leading-tight">تخصصنا في صناعة الألوميتال والمطابخ <br className="hidden md:block"/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-500 to-gold-600 underline decoration-gold-500/20 underline-offset-8">تحت الإشراف الهندسي</span></h3>
-          </div>
-
-          <div className="space-y-32 lg:space-y-48">
-            {servicesList.map((service, index) => {
-              const isEven = index % 2 !== 0;
-              return (
-                <div 
-                  key={service.id} 
-                  id={service.id}
-                  className={`flex flex-col ${isEven ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12 lg:gap-24 scroll-mt-32`}
-                >
-                  
-                  {/* Image Side */}
-                  <div className="w-full lg:w-1/2">
-                    <div className="relative rounded-[3rem] overflow-hidden aspect-[4/3] border border-white/10 shadow-2xl shadow-gold-500/5 group">
-                      <div className="absolute inset-0 bg-neutral-900 flex items-center justify-center">
-                        <service.icon className="w-20 h-20 text-neutral-800" />
-                      </div>
-                      <Image 
-                        src={service.image} 
-                        alt={`${service.title} - تنفيذ مصنع التقوى للألوميتال والمطابخ`}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black-pure/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
-                    </div>
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {servicesList.map((service, index) => (
+              <article key={service.id} id={service.id} className="scroll-mt-28 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition hover:border-gold-500/40">
+                <div className="relative aspect-[4/3] overflow-hidden bg-black-rich">
+                  <Image src={service.image} alt={service.title} fill className="object-cover transition duration-700 motion-safe:hover:scale-105" sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw" priority={index < 2} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black-pure/85 to-transparent" />
+                  <div className="absolute bottom-5 right-5 rounded-2xl border border-gold-500/30 bg-black-pure/70 p-3 backdrop-blur">
+                    <service.icon className="h-7 w-7 text-gold-500" />
                   </div>
-
-                  {/* Content Side */}
-                  <div className="w-full lg:w-1/2">
-                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-[1.5rem] bg-gold-500/10 border border-gold-500/20 mb-8 text-gold-500">
-                      <service.icon className="w-10 h-10" />
-                    </div>
-                    <h2 className="text-4xl md:text-5xl font-black text-white mb-8 tracking-tight">
-                      {service.title}
-                    </h2>
-                    <p className="text-gray-400 leading-relaxed text-xl mb-10 text-balance font-medium">
-                      {service.description}
-                    </p>
-                    
-                    <ul className="space-y-6 mb-12">
-                      <li className="flex items-start gap-4">
-                        <div className="w-6 h-6 rounded-full bg-gold-500/20 flex items-center justify-center border border-gold-500/30 mt-1">
-                          <CheckCircle2 className="w-4 h-4 text-gold-500" />
-                        </div>
-                        <span className="text-gray-300 text-lg font-medium">استخدام أجود أنواع القطاعات العالمية والوطنية المعتمدة.</span>
-                      </li>
-                      <li className="flex items-start gap-4">
-                        <div className="w-6 h-6 rounded-full bg-gold-500/20 flex items-center justify-center border border-gold-500/30 mt-1">
-                          <CheckCircle2 className="w-4 h-4 text-gold-500" />
-                        </div>
-                        <span className="text-gray-300 text-lg font-medium">رفع مقاسات دقيق جداً لضمان المظهر الانسيابي وعدم وجود فوارق.</span>
-                      </li>
-                      <li className="flex items-start gap-4">
-                        <div className="w-6 h-6 rounded-full bg-gold-500/20 flex items-center justify-center border border-gold-500/30 mt-1">
-                          <CheckCircle2 className="w-4 h-4 text-gold-500" />
-                        </div>
-                        <span className="text-gray-300 text-lg font-medium">ضمان شامل ومتابعة دورية لضمان راحة العميل لسنوات طويلة.</span>
-                      </li>
-                    </ul>
-
-                    <div className="flex flex-col sm:flex-row items-center gap-6">
-                      <Link 
-                        href="/quote"
-                        className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gold-500 hover:bg-gold-400 text-black-pure font-black py-4 px-10 rounded-full transition-all duration-300 shadow-lg shadow-gold-500/20 text-lg"
-                      >
-                        اطلب الخدمة الآن
-                        <ArrowLeft className="w-5 h-5" />
-                      </Link>
-                      <a 
-                        href={`tel:${siteInfo.phone}`}
-                        className="w-full sm:w-auto inline-flex items-center justify-center gap-3 text-white font-bold hover:text-gold-500 transition-colors py-4 px-6 border border-white/10 rounded-full"
-                      >
-                        <PhoneCall className="w-5 h-5" />
-                        <span className="dir-ltr">{siteInfo.phone}</span>
-                      </a>
-                    </div>
-                  </div>
-                  
                 </div>
-              );
-            })}
+                <div className="p-6 md:p-7">
+                  <h2 className="text-2xl font-black text-white">{service.title}</h2>
+                  <p className="mt-4 leading-8 text-gray-400">{service.description}</p>
+                  <ul className="mt-6 space-y-3">
+                    {guarantees.slice(0, 3).map((item) => <li key={item} className="flex gap-3 text-sm font-bold text-gray-300"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold-500" />{item}</li>)}
+                  </ul>
+                  <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                    <Link href="/quote" className="inline-flex items-center justify-center gap-2 rounded-full bg-gold-500 px-5 py-3 font-black text-black-pure hover:bg-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-300">اطلب الخدمة<ArrowLeft className="h-4 w-4" /></Link>
+                    <a href={`https://wa.me/${siteInfo.whatsapp}?text=${encodeURIComponent(`أرغب في الاستفسار عن خدمة ${service.title}`)}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-5 py-3 font-bold text-white hover:border-green-400/60 focus:outline-none focus:ring-2 focus:ring-green-400"><MessageCircle className="h-4 w-4 text-green-400" />واتساب</a>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Trust Signal */}
-      <section className="py-24 bg-black-rich border-t border-white/5">
-        <div className="container mx-auto px-4 md:px-6 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-black text-white mb-8">هل تبحث عن معاينة فنية دقيقة؟</h2>
-            <p className="text-gray-400 text-xl mb-12">المهندس هاني توفيق الفقي وفريقه الفني في انتظارك لتصميم مطبخ أحلامك بمواصفات عالمية.</p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <a href={`https://wa.me/${siteInfo.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white font-black py-4 px-10 rounded-full shadow-xl transition-all scale-110">
-                <MessageCircle className="w-6 h-6" />
-                <span>تحدث معنا عبر واتساب</span>
-              </a>
-            </div>
+      <section className="border-y border-white/10 bg-black-rich py-16">
+        <div className="container mx-auto grid gap-8 px-4 md:grid-cols-[1fr_auto] md:items-center md:px-6">
+          <div>
+            <p className="text-sm font-black text-gold-500">استشارة فنية</p>
+            <h2 className="mt-3 text-3xl font-black text-white md:text-5xl">حدد الخامة والتقسيم المناسب قبل بدء التنفيذ</h2>
+            <p className="mt-5 max-w-3xl leading-8 text-gray-400">أرسل صور المساحة أو المقاسات التقريبية، وسيقترح الفريق الفني أفضل مسار للتصميم والتسعير.</p>
           </div>
+          <a href={`tel:${siteInfo.phone}`} className="inline-flex items-center justify-center gap-3 rounded-full bg-white px-7 py-4 font-black text-black-pure hover:bg-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-300"><PhoneCall className="h-5 w-5" />{siteInfo.phone}</a>
         </div>
       </section>
     </div>

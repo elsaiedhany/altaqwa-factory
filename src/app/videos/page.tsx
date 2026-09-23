@@ -1,73 +1,49 @@
-import { siteInfo } from "@/data/siteData";
+import type { Metadata } from "next";
 import { allVideos } from "@/data/mediaInventory";
-import { MEDIA } from "@/data/mediaRegistry";
-import { Play, Video as VideoIcon } from "lucide-react";
+import VideosClient, { VideoItem } from "./VideosClient";
 
-export const metadata = {
-  title: `فيديوهات حقيقية من المصنع | معاينة مباشرة للجودة`,
-  description: "شاهد فيديوهات واقعية لخطوط إنتاج مصنع التقوى، وعمليات تركيب مطابخ الألوميتال، ومعاينة حية لجودة التشطيب والخامات."
+export const metadata: Metadata = {
+  title: "فيديوهات حقيقية من المصنع | معاينة مباشرة للجودة والتشطيب",
+  description:
+    "شاهد فيديوهات واقعية لخطوط إنتاج مصنع التقوى، وعمليات تركيب مطابخ الألوميتال، ومعاينة حية لجودة التشطيب والخامات بإشراف م/ هاني توفيق الفقي.",
+  alternates: { canonical: "/videos" },
+};
+
+// Enhance video titles for high professional presentation while keeping sources
+const titleMap: Record<string, string> = {
+  "interior-design-marble-ceiling-finishing.mp4.mp4": "تسليم نهائي لمطبخ متكامل مع رخام وإضاءة مدمجة",
+  "kitchen-modern-blue-wood-video.mp4.mp4": "استعراض مطبخ أزرق وخشب دافئ مع تشطيب هيدروليك",
+  "kitchen-modern-cashmere-black-video-1.mp4.mp4": "مطبخ كشمير مع لمسات سوداء أنيقة للمساحات المودرن",
+  "kitchen-modern-wood-cream-black-video-1.mp4.mp4": "تناسق ألوان الخشب والبيج في تشطيب ألوميتال فاخر",
+  "kitchen-modern-wood-cream-black-video-2.mp4.mp4": "معاينة الأدراج والوحدات الداخلية وسهولة الحركة",
+  "kitchen-modern-wood-cream-black-video-3.mp4.mp4": "إضاءة ليد بروفايل مدمجة في مطبخ بولي لاك حديث",
+  "kitchen-modern-wood-cream-black-video.mp4.mp4": "جولة كاملة في مطبخ كلاسيك مودرن بعد التركيب",
+  "kitchen-modern-wood-warm-video.mp4.mp4": "مطبخ خشب دافئ مع متانة شاسيه الألوميتال المقاوم للرطوبة",
+  "kitchen-modern-wood-warm-video1.mp4.mp4": "تفاصيل زوايا المطبخ والتقفيل الدقيق لمنع الأتربة",
+  "kitchen-modern-wood-white-video.mp4.mp4": "مطبخ أبيض ناصع بتوزيع هندسي مريح لحركة الأسرة",
+  "modern-kitchen-blue-black-design-video.mp4.mp4": "مطبخ ملكي يجمع بين درجات الكحلي والأسود الفاخر",
+  "modern-kitchen-cream-black-gold-design-video-2.mp4.mp4": "لمسات ذهبية راقية مع درجات البيج الملكي",
+  "modern-kitchen-cream-black-gold-design.mp4.mp4": "تصميم مطبخ قصر بتفاصيل بار وإضاءة عصرية",
+  "modern-kitchen-white-black-lighting-video.mp4.mp4": "إضاءة مسار ذكية مع خامات بولي لاك مقاومة للخدش",
+  "modern-kitchen-wood-black-design-video-2.mp4.mp4": "مطبخ أسود وخشب مودرن مع وحدات تخزين ذكية",
+  "modern-kitchen-wood-black-design-video-3.mp4.mp4": "اختبار نعومة فتح وإغلاق المفصلات الهيدروليكية",
+  "modern-kitchen-wood-black-design-video.mp4.mp4": "مطبخ مودرن كامل التجهيز بمقاسات متناسقة",
+  "modern-wood-and-white-kitchen-cabinet-design.mp4.mp4": "خزائن مطبخ خشب وأبيض بتوزيع عملي أنيق",
+  "woodworking-edge-banding-process-video.mp4.mp4": "ماكينة شريط الحرف (Edge Bander) لتقفيل فائق النعومة",
+  "woodworking-machines-workshop-tour-video.mp4.mp4": "جولة داخل ورشة الماكينات وقسم القص الهندسي",
+  "workshop-production-process-video.mp4.mp4": "مراحل التصنيع الآلي الدقيق داخل مصنع التقوى",
+  "workshop-taqwa-factory-production-video.mp4.mp4": "دقة تقطيع قطاعات الألوميتال بزوايا 45 درجة مضبوطة",
+  "workshop-taqwa-factory-production-video1.mp4.mp4": "تجميع وحدات المطبخ وفحص المتانة قبل الخروج للعميل",
+  "workshop-taqwa-factory-tour-hany-tawfik.mp4.mp4": "جولة المصنع بإشراف المهندس هاني توفيق الفقي",
 };
 
 export default function VideosPage() {
-  return (
-    <div className="pt-24 pb-12 md:pb-20">
-      <section className="bg-black-rich py-12 md:py-20 relative overflow-hidden border-b border-white/5">
-        <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-gold-500/10 blur-[100px] rounded-full pointer-events-none"></div>
-        <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-white mb-6">فيديوهات واقعية</h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto text-balance font-medium">
-            شاهد الجودة بنفسك من خلال لقطات حية من داخل المصنع ومواقع التركيب المختلفة.
-          </p>
-        </div>
-      </section>
+  const videos: VideoItem[] = allVideos.map((v) => ({
+    id: v.id,
+    src: v.src,
+    title: titleMap[v.id] || v.title,
+    category: v.category,
+  }));
 
-      <section className="py-24 bg-black-pure">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {allVideos.map((video) => (
-              <div key={video.id} className="group relative rounded-3xl overflow-hidden bg-white/5 border border-white/10 hover:border-gold-500/30 transition-all duration-500">
-                <div className="relative aspect-video">
-                  <video 
-                    src={video.src} 
-                    className="w-full h-full object-cover"
-                    controls
-                    poster={MEDIA.factory.hero}
-                  />
-                  <div className="absolute inset-0 bg-black-pure/40 group-hover:opacity-0 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-                    <div className="w-16 h-16 rounded-full bg-gold-500 flex items-center justify-center text-black-pure shadow-2xl">
-                      <Play className="w-8 h-8 fill-current" />
-                    </div>
-                  </div>
-                </div>
-                <div className="p-8">
-                  <div className="flex items-center gap-2 mb-3 text-gold-500 text-xs font-bold uppercase tracking-widest">
-                    <VideoIcon className="w-4 h-4" />
-                    <span>{
-                      video.category === "factory" ? "جولة في المصنع" :
-                      video.category === "machine" ? "تكنولوجيا التصنيع" : "تسليم مشروع"
-                    }</span>
-                  </div>
-                  <h3 className="text-2xl font-black text-white group-hover:text-gold-400 transition-colors mb-6 leading-tight">
-                    {video.title}
-                  </h3>
-                  
-                  <div className="pt-6 border-t border-white/10 flex flex-col gap-4">
-                    <a 
-                      href={`https://wa.me/${siteInfo.whatsapp}?text=أريد الاستفسار عن المطبخ في هذا الفيديو: ${video.title}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-gold-500 hover:text-black-pure text-white font-bold py-3 px-6 rounded-2xl transition-all duration-300 border border-white/10 hover:border-gold-500"
-                    >
-                      استفسر عن هذا التصميم
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </div>
-  );
+  return <VideosClient videos={videos} />;
 }
-

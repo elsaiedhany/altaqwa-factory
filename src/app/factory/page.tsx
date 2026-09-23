@@ -1,79 +1,184 @@
-import { CheckCircle2, Factory, Cog, Layers, ShieldCheck, Zap, Ruler, PenTool, Truck } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  CheckCircle2,
+  Factory,
+  Cog,
+  Layers,
+  ShieldCheck,
+  Zap,
+  Ruler,
+  PenTool,
+  Truck,
+  ArrowLeft,
+  Sparkles,
+  PhoneCall,
+} from "lucide-react";
+import PageHeader, { PrimaryLink, SecondaryAnchor } from "@/components/shared/PageHeader";
+import { siteInfo } from "@/data/siteData";
 
-export const metadata = {
-  title: `رحلة التصنيع والماكينات | تكنولوجيا إنتاج المطابخ والألوميتال`,
-  description: "اكتشف رحلة التصنيع في مصنع التقوى للألوميتال عبر مراحل هندسية دقيقة، باستخدام أحدث الماكينات العالمية لضمان الدقة الفائقة والسرعة."
+export const metadata: Metadata = {
+  title: "رحلة التصنيع والماكينات | تكنولوجيا إنتاج المطابخ والألوميتال",
+  description:
+    "اكتشف مراحل التصنيع الهندسية في مصنع التقوى للألوميتال والمطابخ بإشراف م/ هاني توفيق الفقي، باستخدام أحدث الماكينات لضمان الدقة والسرعة والضمان 20 عاما.",
+  alternates: { canonical: "/factory" },
 };
 
 const productionStages = [
-  { id: 1, title: "المعاينة والاستشارة", desc: "بدءاً بزيارة المكان وتقديم استشارة هندسية مجانية لفهم متطلباتك ورؤيتك.", icon: Factory, image: "/assets/images/eng-hany-tawfik-el-faqy-ceo-taqwa.jpg.jpg" },
-  { id: 2, title: "القياس الهندسي", desc: "رفع المقاسات بدقة متناهية بالمليمتر لضمان التطابق التام مع المساحة وتفادي الأخطاء.", icon: Ruler },
-  { id: 3, title: "التصميم 3D", desc: "رؤية المطبخ قبل التنفيذ عبر خدمة التصميم ثلاثي الأبعاد لاختيار الألوان والتقسيمات.", icon: PenTool, image: "/assets/images/kitchen-modern-wood-cream-1.jpg.jpg" },
-  { id: 4, title: "اعتماد المقايسة", desc: "مراجعة نهائية للتصاميم والخامات المختارة مع العميل لضمان الرضا الكامل قبل البدء.", icon: CheckCircle2 },
-  { id: 5, title: "تجهيز الخامات", desc: "انتقاء أجود قطاعات الألوميتال المعتمدة والإكسسوارات الأصلية لضمان المتانة.", icon: Layers, image: "/assets/images/kitchen-modern-beige-black-glass-1.jpg.jpg" },
-  { id: 6, title: "التصنيع والقص الآلي", desc: "استخدام أحدث ماكينات القص الحديثة لضمان زوايا مثالية وتشطيب ناعم وفائق الدقة.", icon: Cog, video: "/assets/videos/woodworking-machines-workshop-tour-video.mp4.mp4" },
-  { id: 7, title: "التجميع الاحترافي", desc: "تجميع أجزاء المطبخ باحترافية عالية لضمان قوة التحمل والثبات لسنوات طويلة.", icon: Zap },
-  { id: 8, title: "مراقبة الجودة", desc: "فحص فني شامل لكل تفصيل في المنتج تحت إشراف هندسي مباشر لضمان جودة التشطيب.", icon: ShieldCheck, image: "/assets/images/kitchen-modern-cream-led-1.jpg.jpg" },
-  { id: 9, title: "التوريد والتركيب", desc: "تركيب احترافي في موقعك بواسطة فريقنا الفني مع تفعيل الضمان الحقيقي من المصنع.", icon: Truck, video: "/assets/videos/interior-design-marble-ceiling-finishing.mp4.mp4" },
+  {
+    id: 1,
+    title: "المعاينة والاستشارة الهندسية",
+    desc: "زيارة موقع العميل وفهم متطلبات الاستخدام، توزيع الأجهزة، وحركة الفتح والغلق.",
+    icon: Factory,
+    image: "/assets/images/eng-hany-tawfik-el-faqy-ceo-taqwa.jpg.jpg",
+  },
+  {
+    id: 2,
+    title: "القياس الهندسي بالمليمتر",
+    desc: "رفع دقيق للأبعاد والزوايا لتفادي أي فروقات، مع فحص استقامة الجدران ومسارات السباكة والكهرباء.",
+    icon: Ruler,
+  },
+  {
+    id: 3,
+    title: "التصميم ثلاثي الأبعاد 3D",
+    desc: "رؤية المطبخ وتوزيع ألوانه وخاماته بشكل مطابق للواقع قبل البدء في تقطيع لوح واحد.",
+    icon: PenTool,
+    image: "/assets/images/kitchen-modern-wood-cream-1.jpg.jpg",
+  },
+  {
+    id: 4,
+    title: "اعتماد المقايسة والعقد",
+    desc: "تحديد تفاصيل الخامات، نوع المفصلات، والجدول الزمني بوضوح وشفافية كاملة.",
+    icon: CheckCircle2,
+  },
+  {
+    id: 5,
+    title: "انتقاء الخامات والقطاعات",
+    desc: "استخدام خامات معتمدة: ألواح بولي لاك تركي، يوفي لاك، وقطاعات ألوميتال ثقيلة.",
+    icon: Layers,
+    image: "/assets/images/kitchen-modern-beige-black-glass-1.jpg.jpg",
+  },
+  {
+    id: 6,
+    title: "القص والتشغيل الآلي",
+    desc: "ماكينات تقطيع دقيقة بزوايا قائمة 100% وماكينات شريط الحرف (Edge Bander) لتقفيل ناعم ومانع للمياه.",
+    icon: Cog,
+    video: "/assets/videos/woodworking-machines-workshop-tour-video.mp4.mp4",
+  },
+  {
+    id: 7,
+    title: "التجميع المتين والمفصلات",
+    desc: "تركيب شاسيهات ألومنيوم مدعمة، ومفصلات سوفت كلوز بلوم ومسارات أدراج هيدروليكية تتحمل الأوزان.",
+    icon: Zap,
+  },
+  {
+    id: 8,
+    title: "الفحص ومراقبة الجودة",
+    desc: "مراجعة فنية نهائية لكل تفصيل قبل خروج المطبخ من المصنع تحت إشراف م/ هاني الفقي.",
+    icon: ShieldCheck,
+    image: "/assets/images/kitchen-modern-cream-led-1.jpg.jpg",
+  },
+  {
+    id: 9,
+    title: "التوريد والتركيب والضمان",
+    desc: "فريق تركيب متخصص يلتزم بنظافة المكان ودقة التثبيت، مع تسليم شهادة الضمان 20 سنة.",
+    icon: Truck,
+    video: "/assets/videos/interior-design-marble-ceiling-finishing.mp4.mp4",
+  },
+];
+
+const factorySpecs = [
+  { label: "مساحة صالة الإنتاج", val: "1000m²+", desc: "طاقة استيعابية للمشاريع الكبيرة والفيلات" },
+  { label: "ماكينات متطورة", val: "12+", desc: "قص ليزري، شريط حرف، وتجميع هيدروليكي" },
+  { label: "فريق فني خبير", val: "50+", desc: "حرفيون متخصصون بإشراف هندسي مباشر" },
+  { label: "مراقبة وضمان", val: "20 سنة", desc: "ضمان حقيقي ضد عيوب الصناعة والرطوبة" },
 ];
 
 export default function FactoryPage() {
-  // Extract machine video if available
   const machineVideo = "/assets/videos/woodworking-machines-workshop-tour-video.mp4.mp4";
 
   return (
-    <div className="pt-24 pb-12 md:pb-20">
-      {/* Page Header */}
-      <section className="bg-black-rich py-10 md:py-16 lg:py-20 relative overflow-hidden border-b border-white/5">
-        <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-gold-500/10 blur-[100px] rounded-full pointer-events-none"></div>
-        <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
-          <h1 className="text-3xl md:text-5xl lg:text-7xl font-black text-white mb-6 uppercase tracking-tight leading-tight">رحلة التصنيع والإتقان</h1>
-          <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto text-balance font-medium leading-relaxed">
-            تحت الإشراف الفني للمهندس هاني توفيق الفقي، نحول المواصفات الهندسية إلى واقع ملموس من خلال خط إنتاج ذكي يجمع بين الدقة البشرية والتكنولوجيا الآلية.
-          </p>
-        </div>
-      </section>
+    <div className="bg-black-pure">
+      <PageHeader
+        eyebrow="رحلة التصنيع والإتقان"
+        title="تكنولوجيا الإنتاج الهندسية التي تصنع الفارق"
+        description="تحت الإشراف الفني المباشر للمهندس هاني توفيق الفقي، نحول المواصفات إلى واقع ملموس من خلال صالة تصنيع مجهزة بأحدث الماكينات لضمان الدقة والسرعة والمتانة."
+        actions={
+          <>
+            <PrimaryLink href="/quote">اطلب مقايسة مصنعك</PrimaryLink>
+            <SecondaryAnchor href={`tel:${siteInfo.phone}`}>
+              استشر المهندس مباشرة
+            </SecondaryAnchor>
+          </>
+        }
+      />
 
       {/* 9 Stages Grid */}
-      <section className="py-12 md:py-16 lg:py-24 bg-black-pure relative overflow-hidden">
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
-            <h2 className="text-sm font-bold text-gold-500 uppercase tracking-widest mb-3">آلية العمل الهندسية</h2>
-            <h3 className="text-2xl md:text-4xl lg:text-5xl font-black text-white leading-tight">9 مراحل للوصول إلى <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-500 to-gold-600">الجودة الفائقة</span></h3>
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="mx-auto mb-16 max-w-3xl text-center">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-gold-500/30 bg-gold-500/10 px-4 py-1.5 text-xs font-bold text-gold-400">
+              <Sparkles className="h-3.5 w-3.5" />
+              المنهجية الفنية المعتمدة
+            </span>
+            <h2 className="mt-3 text-3xl font-black text-white md:text-5xl">
+              ٩ مراحل للوصول إلى{" "}
+              <span className="bg-gradient-to-r from-gold-300 via-gold-500 to-gold-600 bg-clip-text text-transparent">
+                الجودة الهندسية الفائقة
+              </span>
+            </h2>
+            <p className="mt-4 text-base leading-8 text-gray-400">
+              كل مطبخ يمر بسلسلة من خطوات الضبط والمراجعة لضمان سلامته لسنوات طويلة دون أدنى خلل.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {productionStages.map((stage) => (
-              <div key={stage.id} className="group bg-white/5 border border-white/10 rounded-[2.5rem] hover:border-gold-500/30 transition-all duration-500 relative overflow-hidden flex flex-col">
-                {/* Media Preview for Stage */}
+              <div
+                key={stage.id}
+                className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] shadow-xl transition-all duration-500 hover:border-gold-500/50 hover:shadow-[0_15px_35px_rgba(209,141,24,0.12)]"
+              >
+                {/* Media Preview if present */}
                 {(stage.image || stage.video) && (
-                  <div className="relative h-48 w-full overflow-hidden border-b border-white/5">
+                  <div className="relative h-48 w-full overflow-hidden border-b border-white/10 bg-black-rich">
                     {stage.video ? (
-                      <video src={stage.video} className="w-full h-full object-cover" muted loop autoPlay playsInline />
+                      <video
+                        src={stage.video}
+                        className="h-full w-full object-cover"
+                        muted
+                        loop
+                        autoPlay
+                        playsInline
+                      />
                     ) : (
-                      <Image src={stage.image!} alt={stage.title} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+                      <Image
+                        src={stage.image!}
+                        alt={stage.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
                     )}
-                    <div className="absolute inset-0 bg-black-pure/20 group-hover:bg-transparent transition-colors"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black-pure/80 via-transparent to-transparent" />
                   </div>
                 )}
-                
-                <div className="p-10 relative">
-                  <div className="absolute -right-4 -bottom-4 text-[8rem] font-black text-white/5 group-hover:text-gold-500/5 transition-colors z-0 select-none leading-none">
-                    {stage.id}
+
+                <div className="relative p-8">
+                  <div className="pointer-events-none absolute -bottom-4 -left-4 select-none text-[7rem] font-black leading-none text-white/[0.03] transition-colors group-hover:text-gold-500/[0.08]">
+                    0{stage.id}
                   </div>
+
                   <div className="relative z-10">
-                    <div className="w-14 h-14 rounded-2xl bg-gold-500/10 flex items-center justify-center mb-6 border border-gold-500/20 group-hover:bg-gold-500 group-hover:text-black-pure transition-all duration-500">
-                      <stage.icon className="w-7 h-7" />
+                    <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-gold-500/30 bg-gold-500/10 text-gold-400 transition-all duration-300 group-hover:bg-gold-500 group-hover:text-black-pure">
+                      <stage.icon className="h-6 w-6" />
                     </div>
-                    <h4 className="text-2xl font-black text-white mb-4 flex items-center gap-3">
-                      <span className="text-gold-500 text-sm font-bold tracking-tighter">0{stage.id}.</span>
+
+                    <h3 className="text-xl font-black text-white">
+                      <span className="ml-2 text-sm font-bold text-gold-500">0{stage.id}.</span>
                       {stage.title}
-                    </h4>
-                    <p className="text-gray-400 leading-relaxed font-medium text-lg">
-                      {stage.desc}
-                    </p>
+                    </h3>
+
+                    <p className="mt-3 text-sm leading-7 text-gray-400">{stage.desc}</p>
                   </div>
                 </div>
               </div>
@@ -82,62 +187,74 @@ export default function FactoryPage() {
         </div>
       </section>
 
-      {/* Machine & Video Highlight */}
-      <section className="py-24 bg-black-rich border-y border-white/5 relative">
+      {/* Machine & Video Live Section */}
+      <section className="border-y border-white/10 bg-black-rich py-20 md:py-28">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="flex flex-col lg:flex-row items-center gap-16">
-            <div className="w-full lg:w-1/2">
-              <h2 className="text-sm font-bold text-gold-500 uppercase tracking-widest mb-3">تكنولوجيا المستقبل</h2>
-              <h3 className="text-3xl md:text-5xl font-black text-white leading-tight mb-8">
-                أحدث ماكينات القص <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-500 to-gold-600">والتجميع الآلي</span>
-              </h3>
-              
-              <div className="space-y-6 text-gray-400 text-lg leading-relaxed text-balance mb-10">
-                <p>
-                  نعتمد في مصنع التقوى على ماكينات متطورة تضمن لك زوايا قائمة بنسبة 100% وقصاً ناعماً يمنع تسرب الأتربة أو الصوت. الاستثمار في التكنولوجيا هو ما يجعلنا نمنحك ضماناً يصل إلى 20 عاماً.
-                </p>
-                <div className="flex flex-col gap-4">
-                  {[
-                    "دقة متناهية بالمليمتر لتفادي الفوارق",
-                    "سرعة في الإنتاج لتسليم المشاريع الضخمة",
-                    "جودة تشطيب تليق بالقصور والفيلات",
-                    "إشراف بشري خبير من فنيين معتمدين"
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <div className="w-5 h-5 rounded-full bg-gold-500/20 flex items-center justify-center border border-gold-500/30">
-                        <div className="w-2 h-2 rounded-full bg-gold-500"></div>
-                      </div>
-                      <span className="text-white font-medium">{item}</span>
-                    </div>
-                  ))}
-                </div>
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-widest text-gold-500">
+                الاستثمار في المعدات
+              </span>
+              <h2 className="mt-2 text-3xl font-black leading-tight text-white md:text-5xl">
+                ماكينات تقطيع وتجميع حديثة{" "}
+                <span className="bg-gradient-to-r from-gold-300 to-gold-500 bg-clip-text text-transparent">
+                  تمنع الفوارق والتسريب
+                </span>
+              </h2>
+
+              <p className="mt-6 text-base leading-8 text-gray-300">
+                الفرق الحقيقي بين الورش التقليدية ومصنع متكامل يكمن في دقة المعدات؛ ماكينات التقطيع
+                المتطورة وماكينات شريط الحرف الحراري تضمن زوايا قائمة محكمة، وتشطيباً ناعماً يمنع
+                تسلل الرطوبة أو الأتربة لخزائن المطبخ.
+              </p>
+
+              <div className="mt-8 space-y-3">
+                {[
+                  "قص آلي متطابق بالمليمتر لتفادي أي فجوات بعد التركيب",
+                  "تقفيل حواف حراري مقاوم لبخار الماء والحرارة",
+                  "تجميع شاسيهات ألومنيوم مدعمة للأجهزة الثقيلة والرخام",
+                  "إشراف هندسي متواصل من قياس الموقع حتى التسليم النهائي",
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-3">
+                    <CheckCircle2 className="h-5 w-5 shrink-0 text-gold-500" />
+                    <span className="text-sm font-bold text-white">{item}</span>
+                  </div>
+                ))}
               </div>
 
-              <Link href="/quote" className="inline-flex items-center justify-center gap-3 p-5 px-10 rounded-full bg-gold-500 text-black-pure font-black hover:bg-gold-400 transition-all shadow-lg shadow-gold-500/20 text-lg">
-                اطلب تسعير لمشروعك الآن
-              </Link>
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Link
+                  href="/quote"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gold-500 px-7 py-3 text-sm font-black text-black-pure transition hover:bg-gold-400"
+                >
+                  احجز موعد مقايسة
+                  <ArrowLeft className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/videos"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-bold text-white transition hover:border-gold-500/60"
+                >
+                  شاهد فيديوهات الإنتاج
+                </Link>
+              </div>
             </div>
 
-            <div className="w-full lg:w-1/2">
-              <div className="relative rounded-[3rem] overflow-hidden aspect-video border border-gold-500/30 shadow-2xl shadow-gold-500/10 bg-black-pure group">
-                {machineVideo ? (
-                  <video 
-                    src={machineVideo} 
-                    className="w-full h-full object-cover"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                ) : (
-                  <Image src="/assets/images/kitchen-modern-wood-cream-1.jpg.jpg" alt="خط الإنتاج" fill className="object-cover" />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black-pure via-transparent to-transparent opacity-60"></div>
-                <div className="absolute bottom-8 right-8 left-8 flex items-center justify-between">
-                  <span className="text-white font-black text-xl tracking-tighter">بث مباشر من المصنع</span>
-                  <div className="flex gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-600 animate-pulse"></div>
-                    <span className="text-xs text-red-500 font-bold">LIVE</span>
+            <div className="relative">
+              <div className="relative aspect-video overflow-hidden rounded-3xl border border-gold-500/30 bg-black-pure shadow-2xl shadow-gold-500/10">
+                <video
+                  src={machineVideo}
+                  className="h-full w-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black-pure/80 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
+                  <span className="text-sm font-black text-white">لقطة حية من صالة الماكينات</span>
+                  <div className="flex items-center gap-2 rounded-full border border-white/10 bg-black-pure/70 px-3 py-1">
+                    <div className="h-2 w-2 animate-pulse rounded-full bg-red-500" />
+                    <span className="text-[10px] font-bold text-red-400">بث حقيقي</span>
                   </div>
                 </div>
               </div>
@@ -147,18 +264,19 @@ export default function FactoryPage() {
       </section>
 
       {/* Factory Stats */}
-      <section className="py-24 bg-black-pure">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { label: "مساحة الإنتاج", val: "1000m²" },
-              { label: "ماكينة حديثة", val: "12+" },
-              { label: "فني متخصص", val: "50+" },
-              { label: "مراقبة جودة", val: "100%" },
-            ].map((stat, i) => (
-              <div key={i} className="text-center p-8 rounded-3xl bg-white/5 border border-white/10">
-                <p className="text-gold-500 text-sm font-bold uppercase tracking-widest mb-2">{stat.label}</p>
-                <h4 className="text-4xl md:text-5xl font-black text-white">{stat.val}</h4>
+          <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
+            {factorySpecs.map((spec, i) => (
+              <div
+                key={i}
+                className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 text-center transition hover:border-gold-500/40"
+              >
+                <p className="text-xs font-black uppercase tracking-wider text-gold-500">
+                  {spec.label}
+                </p>
+                <h4 className="mt-2 text-3xl font-black text-white md:text-4xl">{spec.val}</h4>
+                <p className="mt-2 text-xs leading-5 text-gray-400">{spec.desc}</p>
               </div>
             ))}
           </div>

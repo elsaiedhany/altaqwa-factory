@@ -1,8 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { MessageCircle, PhoneCall } from "lucide-react";
 import { siteInfo } from "@/data/siteData";
-import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export default function FloatingContact() {
@@ -10,54 +10,49 @@ export default function FloatingContact() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setIsVisible(window.scrollY > 80);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <div className={cn(
-      "fixed bottom-6 left-6 z-[100] flex flex-col gap-4 transition-all duration-500",
-      isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0 pointer-events-none"
-    )}>
-      
-      {/* Phone Button */}
+    <div
+      className={cn(
+        "fixed bottom-6 left-6 z-[100] flex flex-col gap-3 transition-all duration-500",
+        isVisible ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0 pointer-events-none"
+      )}
+    >
+      {/* WhatsApp Action */}
       <a
-        href={`tel:${siteInfo.phone}`}
-        className="relative flex items-center justify-center w-14 h-14 bg-gold-500 text-black-pure rounded-full shadow-lg shadow-gold-500/30 hover:bg-gold-400 hover:scale-110 transition-all duration-300 group"
-        aria-label="اتصل بنا هاتفياً"
-      >
-        <PhoneCall className="w-6 h-6 animate-pulse" />
-        
-        <span className="absolute left-16 bg-black-pure text-gold-500 px-4 py-2 rounded-xl text-sm font-bold opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-2xl border border-gold-500/30">
-          اتصل بنا مباشرة
-          <span className="absolute top-1/2 -left-1 -translate-y-1/2 border-y-[6px] border-y-transparent border-r-[6px] border-r-black-pure"></span>
-        </span>
-      </a>
-
-      {/* WhatsApp Button */}
-      <a
-        href={`https://wa.me/${siteInfo.whatsapp}`}
+        href={`https://wa.me/${siteInfo.whatsapp}?text=${encodeURIComponent("مرحباً مصنع التقوى، أرغب في الاستفسار عن مقايسة مطبخ")}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="relative flex items-center justify-center w-14 h-14 bg-green-500 text-white rounded-full shadow-lg shadow-green-500/30 hover:bg-green-600 hover:scale-110 transition-all duration-300 group"
-        aria-label="تواصل معنا عبر واتساب"
+        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl shadow-green-500/30 transition-transform duration-300 hover:scale-110 active:scale-95"
+        aria-label="محادثة واتساب مباشرة"
       >
-        <MessageCircle className="w-7 h-7" />
-        
-        <span className="absolute left-16 bg-black-pure text-green-500 px-4 py-2 rounded-xl text-sm font-bold opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-2xl border border-green-500/30">
-          تواصل معنا عبر واتساب
-          <span className="absolute top-1/2 -left-1 -translate-y-1/2 border-y-[6px] border-y-transparent border-r-[6px] border-r-black-pure"></span>
+        <MessageCircle className="h-7 w-7 fill-current" />
+        <span className="absolute -inset-1 -z-10 animate-ping rounded-full bg-green-500/40 opacity-75 group-hover:opacity-0" />
+
+        <span className="pointer-events-none absolute left-16 whitespace-nowrap rounded-xl border border-green-500/30 bg-black-pure/90 px-3.5 py-2 text-xs font-bold text-green-400 opacity-0 shadow-2xl backdrop-blur-md transition-all duration-300 group-hover:opacity-100">
+          راسل المهندس هاني واتساب
         </span>
-        <span className="absolute inset-0 rounded-full border-2 border-green-500 animate-ping opacity-75"></span>
       </a>
 
+      {/* Phone Action */}
+      <a
+        href={`tel:${siteInfo.phone}`}
+        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-gold-500 text-black-pure shadow-xl shadow-gold-500/30 transition-transform duration-300 hover:bg-gold-400 hover:scale-110 active:scale-95"
+        aria-label="اتصال هاتف مباشر"
+      >
+        <PhoneCall className="h-6 w-6 animate-pulse" />
+
+        <span className="pointer-events-none absolute left-16 whitespace-nowrap rounded-xl border border-gold-500/30 bg-black-pure/90 px-3.5 py-2 text-xs font-bold text-gold-400 opacity-0 shadow-2xl backdrop-blur-md transition-all duration-300 group-hover:opacity-100">
+          اتصال مباشر {siteInfo.phone}
+        </span>
+      </a>
     </div>
   );
 }
