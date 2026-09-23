@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useId } from "react";
-import { Check, Sparkles, MessageCircle, Phone, ArrowLeft, RotateCcw, ShieldCheck, Ruler, Layers } from "lucide-react";
+import { Check, Sparkles, MessageCircle, Phone, RotateCcw, ShieldCheck, Ruler } from "lucide-react";
 import { siteInfo } from "@/data/siteData";
 
 interface MaterialOption {
@@ -16,44 +16,51 @@ const MATERIALS: MaterialOption[] = [
   {
     id: "polylac",
     name: "بولي لاك تركي فاخر (Polylac)",
-    badge: "الأكثر طلباً",
+    badge: "الأكثر طلباً وفخامة",
     desc: "أعلى درجات اللمعان ومقاومة الخدش والحرارة والماء، مع مظهر زجاجي ملكي.",
-    basePricePerMeter: 4800,
+    basePricePerMeter: 7200,
   },
   {
     id: "uv-lac",
     name: "يوفي لاك حديث (UV Lac)",
     badge: "عصري وأنيق",
     desc: "ألوان مطفية أو لامعة بمقاومة فائقة للرطوبة وسهولة تنظيف استثنائية.",
-    basePricePerMeter: 4400,
+    basePricePerMeter: 6800,
   },
   {
     id: "cladding",
-    name: "ألوميتال كلادينج دبل",
-    badge: "عمر أطول وضمان 20 سنة",
+    name: "ألوميتال كلادينج دبل ثقيل",
+    badge: "الأقوى عمراً وتحملاً",
     desc: "شيت ألومنيوم دبل مقاوم للحرائق والرطوبة وعوامل الجو مع شاسيه مدعم.",
-    basePricePerMeter: 3900,
+    basePricePerMeter: 6200,
+  },
+  {
+    id: "khashem",
+    name: "خشمونيوم ملكي قطاع خاص",
+    badge: "فخامة الخشب مع متانة الألوميتال",
+    desc: "مظهر الخشب الطبيعي الدافئ مع شاسيه ألوميتال مقاوم للمياه تماماً.",
+    basePricePerMeter: 6500,
   },
   {
     id: "fiber",
     name: "ألوميتال فايبر جلاس معتمد",
     badge: "اقتصادي وعملي",
     desc: "مقاوم للمياه 100%، عملي وسهل الصيانة مع قطاعات شريف علي حسن الأصلية.",
-    basePricePerMeter: 3400,
+    basePricePerMeter: 4800,
   },
   {
     id: "dressing",
     name: "دريسنج روم مودرن (Dressing Room)",
     badge: "تنظيم متكامل",
     desc: "تقسيمات ذكية بالمليمتر، وحدات أحذية وإكسسوارات مع مرايا وإضاءة مدمجة.",
-    basePricePerMeter: 3600,
+    basePricePerMeter: 5800,
   },
   {
     id: "jumbo",
-    name: "شبابيك وأبواب ألوميتال جامبو / تانجو",
+    name: "شبابيك وأبواب ألوميتال جامبو عازل",
     badge: "عزل صوت وأتربة",
     desc: "قطاعات ثقيلة بزجاج دبل جورجيا عازل للصوت والحرارة والأتربة.",
-    basePricePerMeter: 3200,
+    basePricePerMeter: 4800,
   },
 ];
 
@@ -67,9 +74,9 @@ interface LayoutOption {
 
 const LAYOUTS: LayoutOption[] = [
   { id: "straight", name: "مستقيم (I-Shape)", iconText: "—", factor: 1.0, desc: "جدار واحد، مثالي للمساحات الضيقة أو الطولية" },
-  { id: "l-shape", name: "حرف L زاوية", iconText: "⌐", factor: 1.15, desc: "استغلال مثالي للزاوية ومثلث حركة عملي" },
-  { id: "u-shape", name: "حرف U ثلاثة جدران", iconText: "⊔", factor: 1.35, desc: "أقصى سعة تخزينية ومساحة عمل واسعة" },
-  { id: "island", name: "مطبخ مع جزيرة (Island)", iconText: "⊞", factor: 1.5, desc: "فخامة عصرية ومساحة إضافية للطهي أو تناول الطعام" },
+  { id: "l-shape", name: "حرف L زاوية", iconText: "⌐", factor: 1.05, desc: "استغلال مثالي للزاوية ومثلث حركة عملي" },
+  { id: "u-shape", name: "حرف U ثلاثة جدران", iconText: "⊔", factor: 1.1, desc: "أقصى سعة تخزينية ومساحة عمل واسعة" },
+  { id: "island", name: "مطبخ مع جزيرة (Island)", iconText: "⊞", factor: 1.15, desc: "فخامة عصرية ومساحة إضافية للطهي أو تناول الطعام" },
 ];
 
 interface AccessoryOption {
@@ -79,16 +86,16 @@ interface AccessoryOption {
 }
 
 const ACCESSORIES: AccessoryOption[] = [
-  { id: "blum", name: "مفصلات وسكك بلوم نمساوي أصلية سوفت كلوز", price: 3500 },
-  { id: "led", name: "إضاءة ليد بروفايل مدمجة بحساس لمس ذكي", price: 2200 },
-  { id: "magic-corner", name: "وحدة ماجيك كورنر وترولي توابل استانلس 304", price: 4200 },
-  { id: "aluminum-skirting", name: "وزرة ألومنيوم سفلية مانعة لتسرب المياه", price: 1400 },
+  { id: "blum", name: "مفصلات وسكك بلوم نمساوي أصلية سوفت كلوز", price: 4000 },
+  { id: "led", name: "إضاءة ليد بروفايل مدمجة بحساس لمس ذكي", price: 2500 },
+  { id: "magic-corner", name: "وحدة ماجيك كورنر وترولي توابل استانلس 304", price: 4500 },
+  { id: "aluminum-skirting", name: "وزرة ألومنيوم سفلية مانعة لتسرب المياه", price: 1500 },
 ];
 
 export default function KitchenEstimator() {
   const [selectedMaterial, setSelectedMaterial] = useState<string>("polylac");
   const [selectedLayout, setSelectedLayout] = useState<string>("l-shape");
-  const [meters, setMeters] = useState<number>(4.5);
+  const [sqMeters, setSqMeters] = useState<number>(6);
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>(["blum", "led"]);
   const metersInputId = useId();
 
@@ -106,10 +113,10 @@ export default function KitchenEstimator() {
     return sum + (acc ? acc.price : 0);
   }, 0);
 
-  // Calculation
-  const baseCost = currentMaterial.basePricePerMeter * meters * currentLayout.factor;
+  // Calculation based on Square Meters (المتر المربع)
+  const baseCost = currentMaterial.basePricePerMeter * sqMeters * currentLayout.factor;
   const totalMin = Math.round((baseCost + accessoriesTotal) * 0.95);
-  const totalMax = Math.round((baseCost + accessoriesTotal) * 1.1);
+  const totalMax = Math.round((baseCost + accessoriesTotal) * 1.08);
 
   const formattedAccessories = selectedAccessories
     .map((id) => ACCESSORIES.find((a) => a.id === id)?.name)
@@ -119,11 +126,12 @@ export default function KitchenEstimator() {
   const whatsappMessage = encodeURIComponent(
     `*طلب مقايسة وحساب تكلفة من حاسبة الموقع - مصنع التقوى*\n\n` +
       `*الخامة المختارة:* ${currentMaterial.name}\n` +
+      `*سعر المتر المربع التقديري:* ${currentMaterial.basePricePerMeter.toLocaleString("ar-EG")} ج.م / م²\n` +
       `*شكل المطبخ:* ${currentLayout.name}\n` +
-      `*المساحة التقريبية:* ${meters} متر طولي\n` +
-      `*الإضافات:* ${formattedAccessories || "بدون إضافات"}\n` +
-      `*التكلفة التقديرية:* ${totalMin.toLocaleString("ar-EG")} - ${totalMax.toLocaleString("ar-EG")} ج.م\n\n` +
-      `أرغب في حجز موعد معاينة ورفع مقاسات هندسية مجانية لموقعي.`
+      `*المساحة الإجمالية:* ${sqMeters} متر مربع (م²)\n` +
+      `*الإضافات:* ${formattedAccessories || "بدون إضافات إضافية"}\n` +
+      `*التكلفة الإجمالية التقديرية:* ${totalMin.toLocaleString("ar-EG")} - ${totalMax.toLocaleString("ar-EG")} ج.م\n\n` +
+      `أرغب في حجز موعد معاينة ورفع مقاسات هندسية مجانية لموقعي تحت إشراف م/ هاني توفيق الفقي.`
   );
 
   return (
@@ -132,11 +140,14 @@ export default function KitchenEstimator() {
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-gold-500/40 bg-gold-500/10 px-3 py-1 text-xs font-bold text-gold-400">
             <Sparkles className="h-3.5 w-3.5" />
-            حاسبة التكلفة الذكية
+            حاسبة التكلفة الذكية (أسعار 2025 / 2026)
           </span>
-          <h2 className="mt-2 text-2xl font-black text-white md:text-3xl">احسب تكلفة مطبخك بالتقريب</h2>
+          <h2 className="mt-2 text-2xl font-black text-white md:text-3xl">
+            احسب تكلفة مطبخك بسعر المتر المربع (م²)
+          </h2>
           <p className="mt-1 text-sm text-gray-400">
-            اختر نوع الخامة والمقاسات للحصول على تقدير فوري شفاف مع ضمان 20 سنة وتصنيع مباشر.
+            اختر الخامة والمساحة بالمتر المربع للحصول على تقدير فوري شامل التصنيع المباشر، النقل،
+            التركيب، وضمان 20 سنة.
           </p>
         </div>
         <button
@@ -144,7 +155,7 @@ export default function KitchenEstimator() {
           onClick={() => {
             setSelectedMaterial("polylac");
             setSelectedLayout("l-shape");
-            setMeters(4.5);
+            setSqMeters(6);
             setSelectedAccessories(["blum", "led"]);
           }}
           className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-gold-400 transition"
@@ -191,9 +202,14 @@ export default function KitchenEstimator() {
                     </div>
                   </div>
                   <div className="mt-3">
-                    <h3 className="font-black text-white text-base group-hover:text-gold-300 transition">
-                      {mat.name}
-                    </h3>
+                    <div className="flex items-baseline justify-between gap-2">
+                      <h3 className="font-black text-white text-base group-hover:text-gold-300 transition">
+                        {mat.name}
+                      </h3>
+                    </div>
+                    <span className="mt-1 inline-block text-xs font-black text-gold-400">
+                      {mat.basePricePerMeter.toLocaleString("ar-EG")} ج.م / م²
+                    </span>
                     <p className="mt-1.5 text-xs leading-5 text-gray-400">{mat.desc}</p>
                   </div>
                 </button>
@@ -230,34 +246,37 @@ export default function KitchenEstimator() {
           </div>
         </div>
 
-        {/* Step 3: Kitchen Length */}
+        {/* Step 3: Kitchen Square Meters */}
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
           <div className="flex items-center justify-between gap-4">
-            <label htmlFor={metersInputId} className="flex items-center gap-2 text-sm font-black text-white cursor-pointer">
+            <label
+              htmlFor={metersInputId}
+              className="flex items-center gap-2 text-sm font-black text-white cursor-pointer"
+            >
               <Ruler className="h-4 w-4 text-gold-500" />
-              ٣. المساحة أو الطول التقريبي:
+              ٣. المساحة الإجمالية بالمتر المربع (م²):
             </label>
             <div className="flex items-baseline gap-1 text-gold-400">
-              <span className="text-3xl font-black">{meters}</span>
-              <span className="text-sm font-bold">متر طولي</span>
+              <span className="text-3xl font-black">{sqMeters}</span>
+              <span className="text-sm font-bold">متر مربع (م²)</span>
             </div>
           </div>
           <div className="mt-4">
             <input
               id={metersInputId}
               type="range"
-              min="2"
-              max="12"
+              min="3"
+              max="16"
               step="0.5"
-              value={meters}
-              onChange={(e) => setMeters(parseFloat(e.target.value))}
-              aria-label="المساحة أو الطول التقريبي بالمتر الطولي"
+              value={sqMeters}
+              onChange={(e) => setSqMeters(parseFloat(e.target.value))}
+              aria-label="المساحة الإجمالية بالمتر المربع"
               className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-white/10 accent-gold-500"
             />
-            <div className="mt-2 flex justify-between text-[11px] font-bold text-gray-500">
-              <span>٢ متر (مطبخ صغير)</span>
-              <span>٦ متر (متوسط)</span>
-              <span>١٢ متر (فيلا / قصر)</span>
+            <div className="mt-2 flex justify-between text-[11px] font-bold text-gray-400">
+              <span>٣ م² (مطبخ ميني)</span>
+              <span>٦ - ٨ م² (مطبخ شقة متوسط)</span>
+              <span>١٦ م² (مطبخ فيلا واسع)</span>
             </div>
           </div>
         </div>
@@ -302,7 +321,7 @@ export default function KitchenEstimator() {
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-gold-400">
-                التقدير المبدئي الشامل للتصنيع والتركيب:
+                التقدير الإجمالي الشامل للتصنيع والتركيب والضمان 20 سنة:
               </span>
               <div className="mt-2 flex items-baseline gap-2">
                 <span className="text-3xl font-black text-white md:text-5xl">
@@ -312,7 +331,8 @@ export default function KitchenEstimator() {
               </div>
               <p className="mt-2 text-xs text-gray-400 flex items-center gap-2">
                 <ShieldCheck className="h-4 w-4 text-gold-500 shrink-0" />
-                يشمل التصنيع المباشر، النقل، التركيب الاحترافي، والضمان المعتمد 20 سنة.
+                سعر المتر المربع ({currentMaterial.basePricePerMeter.toLocaleString("ar-EG")} ج.م / م²)
+                يشمل الخامات الأصلية والتجميع والتركيب بالدقهلية ومصر.
               </p>
             </div>
 

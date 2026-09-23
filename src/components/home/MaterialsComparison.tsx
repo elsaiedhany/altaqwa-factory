@@ -27,7 +27,7 @@ const COMPARISON_DATA: MaterialComparisonItem[] = [
     waterAndHeat: "مقاوم 100% للرطوبة وبخار الطهي وحرارة الأفران",
     cleaning: "فائق السهولة بمسحة قماش قطنية ناعمة",
     bestFor: "المطابخ المودرن الفاخرة، الفيلات، والشقق العصرية",
-    approxPrice: "من 4,800 ج.م / م",
+    approxPrice: "من 7,000 إلى 7,500 ج.م / م²",
     warranty: "20 سنة ضمان حقيقي",
   },
   {
@@ -38,7 +38,7 @@ const COMPARISON_DATA: MaterialComparisonItem[] = [
     waterAndHeat: "مقاوم تام للحرائق، المياه، والحشرات 100%",
     cleaning: "سهل جداً بالماء ومساحيق التنظيف المعتادة",
     bestFor: "الاستخدام الشاق، المطابخ العائلية الكبيرة، وعشاق الألوميتال",
-    approxPrice: "من 3,900 ج.م / م",
+    approxPrice: "من 6,000 إلى 6,500 ج.م / م²",
     warranty: "20 سنة ضمان حقيقي",
   },
   {
@@ -49,7 +49,7 @@ const COMPARISON_DATA: MaterialComparisonItem[] = [
     waterAndHeat: "عازل ممتاز للبخار والحرارة المتوسطة",
     cleaning: "سلس ولا يترك بصمات أصابع واضحة",
     bestFor: "التصاميم الهادئة الإسكندنافية والمساحات المفتوحة",
-    approxPrice: "من 4,400 ج.م / م",
+    approxPrice: "من 6,500 إلى 7,000 ج.م / م²",
     warranty: "20 سنة ضمان حقيقي",
   },
   {
@@ -60,7 +60,7 @@ const COMPARISON_DATA: MaterialComparisonItem[] = [
     waterAndHeat: "مقاوم للماء والرطوبة 100% بدون صدأ",
     cleaning: "سريع وسهل الصيانة",
     bestFor: "المطابخ الاقتصادية، وحدات الأوفيس، والشقق المؤجرة",
-    approxPrice: "من 3,400 ج.م / م",
+    approxPrice: "من 4,600 إلى 5,200 ج.م / م²",
     warranty: "20 سنة ضمان حقيقي",
   },
 ];
